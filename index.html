@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkpoint — Human approval for AI agent actions</title>
+  <meta name="description" content="Checkpoint intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:         #080808;
+      --surface:    #101010;
+      --surface-2:  #161616;
+      --border:     #1f1f1f;
+      --border-2:   #2a2a2a;
+      --text:       #f0f0f0;
+      --muted:      #606060;
+      --muted-2:    #888888;
+      --accent:     #4ade80;
+      --accent-dim: rgba(74,222,128,0.08);
+      --accent-mid: rgba(74,222,128,0.15);
+      --approved:   #4ade80;
+      --rejected:   #f87171;
+      --pending:    #fbbf24;
+      --code-bg:    #0c0c0c;
+      --radius:     8px;
+      --radius-lg:  14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .section { padding: 96px 0; }
+    .section-sm { padding: 64px 0; }
+
+    /* ── Typography ─────────────────────────────────────────── */
+    h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+    h3 { font-size: 1.1rem; font-weight: 600; }
+    p  { color: var(--muted-2); line-height: 1.75; }
+
+    .label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    /* ── Nav ────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-icon svg { width: 16px; height: 16px; color: #000; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: 0.88rem;
+      color: var(--muted-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Buttons ────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-primary:hover { background: #6ee7b7; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--muted-2);
+      border: 1px solid var(--border-2);
+    }
+    .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+    .btn-lg { font-size: 1rem; padding: 14px 28px; }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero {
+      padding: 160px 0 80px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(74,222,128,0.2);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .hero h1 { max-width: 780px; margin: 0 auto 24px; }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.15rem;
+      max-width: 540px;
+      margin: 0 auto 40px;
+      color: var(--muted-2);
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .hero-compat {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .hero-compat span { color: var(--muted-2); }
+
+    /* ── Live feed ──────────────────────────────────────────── */
+    .feed-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      overflow: hidden;
+    }
+    .feed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .feed-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted-2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .feed-live {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--approved);
+      font-weight: 600;
+    }
+    .feed-live .dot {
+      width: 5px; height: 5px;
+      background: var(--approved);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    .feed-list {
+      padding: 8px 0;
+      min-height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+    .feed-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border);
+      animation: slideIn 0.4s ease;
+      transition: opacity 0.3s;
+    }
+    .feed-item:last-child { border-bottom: none; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .feed-status {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .feed-status.approved { background: var(--approved); }
+    .feed-status.rejected { background: var(--rejected); }
+    .feed-status.pending  { background: var(--pending); animation: pulse 1.5s infinite; }
+    .feed-body { flex: 1; min-width: 0; text-align: left; }
+    .feed-action {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .feed-meta { font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
+    .feed-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 100px;
+      flex-shrink: 0;
+    }
+    .feed-badge.approved { background: rgba(74,222,128,0.12); color: var(--approved); }
+    .feed-badge.rejected { background: rgba(248,113,113,0.12); color: var(--rejected); }
+    .feed-badge.pending  { background: rgba(251,191,36,0.12);  color: var(--pending);  }
+
+    /* ── Problem ────────────────────────────────────────────── */
+    .problem { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    .problem-card {
+      background: var(--surface);
+      padding: 32px;
+    }
+    .problem-card .incident {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--rejected);
+      background: rgba(248,113,113,0.06);
+      border: 1px solid rgba(248,113,113,0.15);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .problem-card p { font-size: 0.9rem; }
+
+    /* ── How it works ───────────────────────────────────────── */
+    .steps { display: flex; flex-direction: column; gap: 2px; margin-top: 56px; }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      padding-top: 4px;
+    }
+    .step-copy h3 { font-size: 1.15rem; margin-bottom: 10px; }
+    .step-copy p { font-size: 0.9rem; }
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      line-height: 1.7;
+      color: var(--muted-2);
+      overflow-x: auto;
+    }
+    .code-block .key   { color: #93c5fd; }
+    .code-block .str   { color: #86efac; }
+    .code-block .num   { color: #fca5a5; }
+    .code-block .punct { color: var(--muted); }
+    .code-block .comm  { color: var(--muted); font-style: italic; }
+    .code-block .verb  { color: var(--accent); font-weight: 500; }
+    .code-block .url   { color: #c4b5fd; }
+
+    /* ── Callout ────────────────────────────────────────────── */
+    .callout {
+      background: var(--accent-dim);
+      border: 1px solid rgba(74,222,128,0.15);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .callout h2 { margin-bottom: 16px; }
+    .callout p { max-width: 520px; margin: 0 auto; font-size: 1rem; }
+    .callout-comparison {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 40px;
+      text-align: left;
+    }
+    .compare-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+    .compare-box .compare-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .compare-box.them .compare-label { color: var(--muted); }
+    .compare-box.us   .compare-label { color: var(--accent); }
+    .compare-box h3 { font-size: 1rem; margin-bottom: 6px; }
+    .compare-box p  { font-size: 0.85rem; }
+    .vs-divider { font-size: 1.4rem; font-weight: 700; color: var(--muted); text-align: center; }
+
+    /* ── Features ───────────────────────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    .feature {
+      background: var(--surface);
+      padding: 32px;
+    }
+    .feature-icon {
+      width: 36px; height: 36px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(74,222,128,0.15);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-icon svg { width: 18px; height: 18px; color: var(--accent); }
+    .feature h3 { margin-bottom: 8px; }
+    .feature p  { font-size: 0.88rem; }
+
+    /* ── EU AI Act ──────────────────────────────────────────── */
+    .euai {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .euai-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .euai-quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 24px;
+      margin: 32px 0;
+    }
+    .euai-quote p {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--muted-2);
+      line-height: 1.6;
+    }
+    .euai-quote cite { font-size: 0.8rem; color: var(--muted); margin-top: 8px; display: block; font-style: normal; }
+    .euai-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .euai-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--muted-2);
+    }
+    .euai-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Pricing ────────────────────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .plan {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.2s;
+    }
+    .plan:hover { border-color: var(--border-2); }
+    .plan.featured {
+      border-color: rgba(74,222,128,0.3);
+      background: var(--accent-dim);
+    }
+    .plan-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(74,222,128,0.12);
+      padding: 3px 10px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 8px;
+      align-self: flex-start;
+    }
+    .plan-name { font-size: 0.82rem; font-weight: 600; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .plan-price { font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 2px; }
+    .plan-price span { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
+    .plan-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; }
+    .plan-divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+    .plan-features li { font-size: 0.82rem; color: var(--muted-2); display: flex; align-items: flex-start; gap: 8px; }
+    .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .plan-cta { margin-top: 24px; text-align: center; }
+
+    /* ── Final CTA ──────────────────────────────────────────── */
+    .final-cta {
+      text-align: center;
+      padding: 120px 0;
+    }
+    .final-cta h2 { margin-bottom: 16px; }
+    .final-cta p { max-width: 440px; margin: 0 auto 40px; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p { font-size: 0.82rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--muted-2); }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .step { grid-template-columns: 36px 1fr; }
+      .step-code { grid-column: 2; }
+      .euai-inner { grid-template-columns: 1fr; gap: 32px; }
+      .callout-comparison { grid-template-columns: 1fr; }
+      .vs-divider { display: none; }
+      .nav-links a:not(:last-child) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ─────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 1L14 4V8C14 11.3 11.3 14.3 8 15C4.7 14.3 2 11.3 2 8V4L8 1Z"/>
+          <path d="M5.5 8L7 9.5L10.5 6"/>
+        </svg>
+      </div>
+      Checkpoint
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Get API key →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      EU AI Act Article 14 compliance ready
+    </div>
+    <h1>Your agents are taking<br /><span>real-world actions.</span><br />Who's checking?</h1>
+    <p class="hero-sub">Checkpoint intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary btn-lg">Get your API key →</a>
+      <a href="#how-it-works" class="btn btn-secondary btn-lg">See how it works</a>
+    </div>
+    <p class="hero-compat">Works with <span>LangChain, OpenAI Agents SDK, AutoGen, CrewAI</span>, or plain HTTP.<br />If your agent can POST, it can use Checkpoint.</p>
+
+    <!-- Live feed -->
+    <div style="margin-top: 48px;">
+      <div class="feed-wrapper">
+        <div class="feed-header">
+          <span class="feed-title">Approval requests</span>
+          <span class="feed-live"><span class="dot"></span>Live</span>
+        </div>
+        <div class="feed-list" id="feed-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Problem ──────────────────────────────────────────────────────── -->
+<section class="section problem">
+  <div class="container">
+    <span class="label">The problem</span>
+    <h2>AI agents break things<br />in new ways.</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="incident">billing-agent: approved $47,200 refund<br/>→ policy threshold: &lt; $50,000 ✓</div>
+        <h3 style="margin-bottom:8px;">The policy loophole</h3>
+        <p>Your agent followed the rules exactly. The rules were wrong for this case. Nobody reviewed it before the money left the account.</p>
+      </div>
+      <div class="problem-card">
+        <div class="incident">email-agent: sent campaign<br/>→ recipients: all_customers (48,203) ✓</div>
+        <h3 style="margin-bottom:8px;">The blast radius</h3>
+        <p>The agent was configured to send emails. Nobody specified that "send" meant "send to everyone, right now, with the draft copy."</p>
+      </div>
+      <div class="problem-card">
+        <div class="incident">code-agent: git push origin main<br/>→ Friday 16:47 EST ✓</div>
+        <h3 style="margin-bottom:8px;">The Friday deploy</h3>
+        <p>Your agent fixed the bug and pushed. Nobody told it that main is production, Friday is sacred, and this particular fix had a side effect.</p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:32px; font-size:0.9rem;">
+      These aren't hypotheticals. They're the support tickets developers are filing right now.<br/>
+      The problem isn't that your agents are bad. It's that <strong style="color:var(--text)">consequential actions need a human in the loop</strong> — and nothing in your current stack provides that.
+    </p>
+  </div>
+</section>
+
+<!-- ── How it works ─────────────────────────────────────────────────── -->
+<section class="section" id="how-it-works">
+  <div class="container">
+    <span class="label">How it works</span>
+    <h2>Three steps. One API.</h2>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-copy">
+          <h3>Your agent calls Checkpoint before acting</h3>
+          <p style="margin-top:8px;">A single POST before any consequential action. Include what the agent wants to do, why, and where to send the decision.</p>
+        </div>
+        <div class="code-block step-code">
+<span class="verb">POST</span> <span class="url">/api/v1/hitl/requests</span>
+<span class="comm">X-API-Key: oa_live_...</span>
+
+<span class="punct">{</span>
+  <span class="key">"action"</span><span class="punct">:</span> <span class="str">"send_refund"</span><span class="punct">,</span>
+  <span class="key">"summary"</span><span class="punct">:</span> <span class="str">"Issue $4,200 refund<br/>  to ACME Corp (outside policy)"</span><span class="punct">,</span>
+  <span class="key">"context"</span><span class="punct">:</span> <span class="punct">{</span>
+    <span class="key">"amount"</span><span class="punct">:</span> <span class="num">4200</span><span class="punct">,</span>
+    <span class="key">"customer"</span><span class="punct">:</span> <span class="str">"ACME Corp"</span>
+  <span class="punct">},</span>
+  <span class="key">"callback_url"</span><span class="punct">:</span> <span class="str">"https://app.co/decision"</span>
+<span class="punct">}</span></div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-copy">
+          <h3>The right human gets notified instantly</h3>
+          <p style="margin-top:8px;">Approval cards land in Slack or email with full context. One click to approve or reject. No login required. Works on mobile.</p>
+        </div>
+        <div class="code-block step-code" style="background: var(--surface-2); border-color: var(--border-2); padding: 20px;">
+          <div style="font-size:0.8rem; color:var(--muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.06em;">Slack notification</div>
+          <div style="background:var(--code-bg); border-radius:6px; padding:14px; border-left: 3px solid var(--pending);">
+            <div style="color:var(--text); font-size:0.82rem; margin-bottom:6px;"><strong>⏳ Approval required</strong></div>
+            <div style="color:var(--muted-2); font-size:0.78rem; margin-bottom:12px; line-height:1.5;">billing-agent wants to issue a <strong style="color:var(--text)">$4,200 refund</strong> to ACME Corp.<br/>This is outside the standard policy threshold.</div>
+            <div style="display:flex; gap:8px;">
+              <span style="background:rgba(74,222,128,0.15); color:var(--approved); padding:5px 12px; border-radius:4px; font-size:0.75rem; font-weight:600;">✓ Approve</span>
+              <span style="background:rgba(248,113,113,0.12); color:var(--rejected); padding:5px 12px; border-radius:4px; font-size:0.75rem; font-weight:600;">✗ Reject</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-copy">
+          <h3>Your agent gets the decision via webhook</h3>
+          <p style="margin-top:8px;">Decision POSTs to your callback URL with HMAC signature. The action executes. Everything is logged. You have a complete audit trail.</p>
+        </div>
+        <div class="code-block step-code">
+<span class="comm">// Webhook payload → your callback_url</span>
+
+<span class="punct">{</span>
+  <span class="key">"id"</span><span class="punct">:</span> <span class="str">"req_a3f5e2c1..."</span><span class="punct">,</span>
+  <span class="key">"status"</span><span class="punct">:</span> <span class="str">"approved"</span><span class="punct">,</span>
+  <span class="key">"decided_by"</span><span class="punct">:</span> <span class="str">"sarah@co.com"</span><span class="punct">,</span>
+  <span class="key">"decided_at"</span><span class="punct">:</span> <span class="str">"2026-05-29T14:32:11Z"</span><span class="punct">,</span>
+  <span class="key">"action"</span><span class="punct">:</span> <span class="str">"send_refund"</span>
+<span class="punct">}</span>
+
+<span class="comm">// Signed with HMAC-SHA256</span>
+<span class="comm">// X-OA-Signature: sha256=...</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Callout ───────────────────────────────────────────────────────── -->
+<section class="section-sm">
+  <div class="container">
+    <div class="callout">
+      <span class="label">Not observability. Control.</span>
+      <h2>Your competitors watch what agents did.<br />We control what they're <em>allowed</em> to do.</h2>
+      <p>LangSmith, Langfuse and Humanloop are post-mortems. Checkpoint is a checkpoint.</p>
+      <div class="callout-comparison">
+        <div class="compare-box them">
+          <div class="compare-label">Observability tools</div>
+          <h3>What did my agent do?</h3>
+          <p style="font-size:0.85rem;">Trace and log agent actions after they happen. Great for debugging. Too late to stop the $47K refund.</p>
+        </div>
+        <div class="vs-divider">vs</div>
+        <div class="compare-box us">
+          <div class="compare-label">Checkpoint</div>
+          <h3>Can my agent do this?</h3>
+          <p style="font-size:0.85rem;">Intercept before execution. Human confirms. Then it happens — with a logged, audited paper trail.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ─────────────────────────────────────────────────────── -->
+<section class="section" id="features">
+  <div class="container">
+    <span class="label">Features</span>
+    <h2>Everything you need.<br />Nothing you don't.</h2>
+    <div class="features-grid">
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>
+        </div>
+        <h3>Policy engine</h3>
+        <p>Configure rules per tenant. Actions that match auto-approve instantly. Everything else holds for human review. No code changes needed to update policies.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16a2 2 0 0 1 .27.92z"/></svg>
+        </div>
+        <h3>One-click approval</h3>
+        <p>Email and Slack cards with approve/reject buttons. No login required. Works on mobile. The decision takes 10 seconds, not 10 minutes.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Immutable audit log</h3>
+        <p>Every request, decision, and webhook delivery is logged append-only. SOC 2 and EU AI Act Article 14 ready. Know exactly what happened and when.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h3>Webhook delivery</h3>
+        <p>Decisions POST back to your callback URL, signed with HMAC-SHA256. Three retries with exponential backoff. Your agent always gets the answer.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3>Multi-tenant</h3>
+        <p>Separate tenants, API keys, policies and audit logs per product or client. Stripe-style <code style="font-size:0.78rem; color:var(--accent);">oa_live_</code> / <code style="font-size:0.78rem; color:var(--muted-2);">oa_test_</code> key format.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Framework agnostic</h3>
+        <p>Any language. Any agent framework. LangChain, OpenAI Agents SDK, AutoGen, CrewAI — or plain HTTP. If it can POST, it can use Checkpoint.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── EU AI Act ─────────────────────────────────────────────────────── -->
+<section class="section euai">
+  <div class="container euai-inner">
+    <div>
+      <span class="label">Compliance</span>
+      <h2>The EU AI Act requires human oversight. You need a paper trail.</h2>
+      <div class="euai-quote">
+        <p>"High-risk AI systems shall be designed and developed in such a way, including with appropriate human-machine interface tools, that they can be effectively overseen by natural persons during the period in which the AI system is in use."</p>
+        <cite>— EU AI Act, Article 14 (Human Oversight)</cite>
+      </div>
+      <p style="font-size:0.9rem;">If your agents touch healthcare, finance, legal, government, HR, or critical infrastructure, Article 14 applies. Checkpoint gives you the oversight layer and the audit trail to prove it.</p>
+    </div>
+    <div>
+      <ul class="euai-list">
+        <li>Every agent action request logged with full context</li>
+        <li>Human decision recorded with timestamp and identity</li>
+        <li>Policy rules versioned and auditable</li>
+        <li>Immutable append-only event log — tamper-evident</li>
+        <li>Configurable approval expiry and escalation</li>
+        <li>On-premise deployment available for sovereign data requirements</li>
+        <li>MCP-native integration for Anthropic Claude and compatible agents</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ───────────────────────────────────────────────────────── -->
+<section class="section" id="pricing">
+  <div class="container">
+    <span class="label">Pricing</span>
+    <h2 style="margin-bottom:8px;">Start free.<br/>Scale when you need to.</h2>
+    <p>No credit card required. Upgrade or downgrade anytime.</p>
+    <div class="pricing-grid">
+
+      <div class="plan">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">$0</div>
+        <div class="plan-desc">For evaluation and personal projects</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>100 requests / month</li>
+          <li>1 policy rule</li>
+          <li>Email notifications</li>
+          <li>7-day audit log retention</li>
+          <li>1 tenant</li>
+        </ul>
+        <div class="plan-cta"><a href="#" class="btn btn-secondary" style="width:100%; justify-content:center;">Get started →</a></div>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">$29<span>/mo</span></div>
+        <div class="plan-desc">For small teams shipping agents</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>2,500 requests / month</li>
+          <li>5 policy rules</li>
+          <li>Email + Slack</li>
+          <li>30-day audit log retention</li>
+          <li>3 tenants</li>
+        </ul>
+        <div class="plan-cta"><a href="#" class="btn btn-secondary" style="width:100%; justify-content:center;">Get started →</a></div>
+      </div>
+
+      <div class="plan featured">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$99<span>/mo</span></div>
+        <div class="plan-desc">For teams running agents in production</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>25,000 requests / month</li>
+          <li>Unlimited policy rules</li>
+          <li>Email, Slack, Telegram, webhooks</li>
+          <li>1-year audit log retention</li>
+          <li>Unlimited tenants</li>
+          <li>HMAC-signed webhooks</li>
+          <li>Priority support</li>
+        </ul>
+        <div class="plan-cta"><a href="#" class="btn btn-primary" style="width:100%; justify-content:center;">Get started →</a></div>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price" style="font-size:1.4rem; padding-top:6px;">Custom</div>
+        <div class="plan-desc">For regulated industries and government</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Unlimited requests</li>
+          <li>SLA guarantee</li>
+          <li>SSO / SAML</li>
+          <li>On-premise deployment</li>
+          <li>SOC 2 Type II</li>
+          <li>EU AI Act compliance package</li>
+          <li>Dedicated support</li>
+        </ul>
+        <div class="plan-cta"><a href="#" class="btn btn-secondary" style="width:100%; justify-content:center;">Talk to us →</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Final CTA ─────────────────────────────────────────────────────── -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Your agents are already running.<br />Make sure someone's watching.</h2>
+    <p>Free to start. One API call to integrate. Works with every agent framework.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="#" class="btn btn-primary btn-lg">Get your API key — it's free →</a>
+      <a href="#" class="btn btn-secondary btn-lg">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Checkpoint. Built by <a href="https://developdigitally.com" style="color:var(--muted-2); text-decoration:none;">Develop Digitally</a>.</p>
+    <div class="footer-links">
+      <a href="#">Docs</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:hello@checkpoint.dev">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Live feed script ──────────────────────────────────────────────── -->
+<script>
+  const REQUESTS = [
+    { action: "send_refund",        meta: "billing-agent → $4,200 refund",          status: "approved" },
+    { action: "git_push_main",      meta: "code-agent → push to production",         status: "rejected" },
+    { action: "send_campaign",      meta: "marketing-agent → 12,400 recipients",     status: "pending"  },
+    { action: "delete_records",     meta: "cleanup-agent → 8,203 customer records",  status: "rejected" },
+    { action: "approve_invoice",    meta: "ap-agent → Invoice #1042 · $18,500",      status: "approved" },
+    { action: "deploy_contract",    meta: "legal-agent → NDA v3 to ACME Corp",       status: "approved" },
+    { action: "transfer_funds",     meta: "treasury-agent → wire $92,000",           status: "pending"  },
+    { action: "publish_post",       meta: "content-agent → blog post to 40K subs",   status: "approved" },
+    { action: "revoke_access",      meta: "security-agent → 14 user accounts",       status: "rejected" },
+    { action: "update_pricing",     meta: "ops-agent → raise prices 12%",            status: "pending"  },
+    { action: "send_invoice",       meta: "billing-agent → overdue notice to client", status: "approved" },
+    { action: "run_migration",      meta: "db-agent → schema change on prod",        status: "rejected" },
+  ];
+
+  const LABELS = { approved: "Approved", rejected: "Rejected", pending: "Pending" };
+  const MAX_ITEMS = 6;
+  let pool = [...REQUESTS].sort(() => Math.random() - 0.5);
+  let idx = 0;
+
+  function nextItem() {
+    const item = pool[idx % pool.length];
+    idx++;
+    return item;
+  }
+
+  function timeAgo(secs) {
+    if (secs < 5)  return "just now";
+    if (secs < 60) return `${secs}s ago`;
+    return `${Math.floor(secs/60)}m ago`;
+  }
+
+  const list = document.getElementById('feed-list');
+  const items = [];
+  const timestamps = [];
+
+  function addItem() {
+    const data = nextItem();
+    const now = Date.now();
+    items.unshift(data);
+    timestamps.unshift(now);
+
+    if (items.length > MAX_ITEMS) {
+      items.pop();
+      timestamps.pop();
+    }
+
+    renderFeed();
+  }
+
+  function renderFeed() {
+    list.innerHTML = items.map((item, i) => {
+      const secs = Math.floor((Date.now() - timestamps[i]) / 1000);
+      return `
+        <div class="feed-item">
+          <div class="feed-status ${item.status}"></div>
+          <div class="feed-body">
+            <div class="feed-action">${item.action}</div>
+            <div class="feed-meta">${item.meta} · ${timeAgo(secs)}</div>
+          </div>
+          <span class="feed-badge ${item.status}">${LABELS[item.status]}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // Seed with initial items
+  for (let i = 0; i < 5; i++) addItem();
+
+  // Add new item every 3s
+  setInterval(addItem, 3000);
+
+  // Refresh timestamps every 10s
+  setInterval(renderFeed, 10000);
+</script>
+
+</body>
+</html>
