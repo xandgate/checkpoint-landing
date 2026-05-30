@@ -528,6 +528,48 @@
       .nav-links a:not(:last-child) { display: none; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Oversight",
+    "url": "https://oversight.dev",
+    "applicationCategory": "DeveloperApplication",
+    "applicationSubCategory": "AI Agent Governance",
+    "operatingSystem": "Any (cloud API, no installation required)",
+    "description": "Oversight is a human-in-the-loop (HITL) action gateway for AI agents. It sits between an AI agent and its actions — intercepting intended actions before execution, evaluating them against policies, notifying humans via email, Slack, or Telegram for one-click approval or rejection, and returning the decision to the agent via webhook. No SDK required. EU AI Act Article 14 compliant. Used for AI agent governance, coding agent circuit-breaking, token waste prevention, and enterprise agentic ops.",
+    "keywords": "HITL, human-in-the-loop, AI agent governance, EU AI Act, EU AI Act Article 14, NIST AI RMF, agentic ops, action gateway, enterprise architect, enterprise AI governance, coding agent circuit breaker, token waste prevention, AI agent approval, AI oversight, pre-execution control, AI compliance, LLM agent safety, multi-agent systems, webhook approval, autonomous agent control",
+    "featureList": [
+      "Pre-execution action interception",
+      "Policy-based auto-approval",
+      "Human review notifications via email, Slack, and Telegram",
+      "One-click approve/reject interface",
+      "Webhook-based decision delivery with HMAC-SHA256 signing",
+      "Immutable audit log",
+      "No SDK required — plain HTTP",
+      "EU AI Act Article 14 compliance support",
+      "NIST AI RMF alignment",
+      "Coding agent circuit breaker",
+      "Multi-tenant policy engine"
+    ],
+    "offers": [
+      {"@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD", "description": "100 requests per month, no credit card required"},
+      {"@type": "Offer", "name": "Starter", "price": "29", "priceCurrency": "USD", "description": "2,500 requests per month, email and Slack notifications"},
+      {"@type": "Offer", "name": "Pro", "price": "99", "priceCurrency": "USD", "description": "25,000 requests per month, all channels, audit export"},
+      {"@type": "Offer", "name": "Enterprise", "price": "0", "priceCurrency": "USD", "description": "Custom pricing, unlimited requests, SSO, SLA, on-premise"}
+    ],
+    "provider": {
+      "@type": "Organization",
+      "name": "Develop Digitally Limited",
+      "url": "https://developdigitally.com",
+      "contactPoint": {"@type": "ContactPoint", "email": "hello@oversight.dev", "contactType": "customer support"}
+    },
+    "sameAs": [
+      "https://github.com/xandgate"
+    ],
+    "isAccessibleForFree": true
+  }
+  </script>
 </head>
 <body>
 
