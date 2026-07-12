@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oversight — Human approval for AI agent actions</title>
-  <meta name="description" content="Oversight intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail." />
+  <title>Heed — Human approval for AI agent actions</title>
+  <meta name="description" content="Heed intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -532,12 +532,12 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Oversight",
-    "url": "https://oversight.dev",
+    "name": "Heed",
+    "url": "https://getheed.ai",
     "applicationCategory": "DeveloperApplication",
     "applicationSubCategory": "AI Agent Governance",
     "operatingSystem": "Any (cloud API, no installation required)",
-    "description": "Oversight is a human-in-the-loop (HITL) action gateway for AI agents. It sits between an AI agent and its actions — intercepting intended actions before execution, evaluating them against policies, notifying humans via email, Slack, or Telegram for one-click approval or rejection, and returning the decision to the agent via webhook. No SDK required. EU AI Act Article 14 compliant. Used for AI agent governance, coding agent circuit-breaking, token waste prevention, and enterprise agentic ops.",
+    "description": "Heed is a human-in-the-loop (HITL) action gateway for AI agents. It sits between an AI agent and its actions — intercepting intended actions before execution, evaluating them against policies, notifying humans via email, Slack, or Telegram for one-click approval or rejection, and returning the decision to the agent via webhook. No SDK required. EU AI Act Article 14 compliant. Used for AI agent governance, coding agent circuit-breaking, token waste prevention, and enterprise agentic ops.",
     "keywords": "HITL, human-in-the-loop, AI agent governance, EU AI Act, EU AI Act Article 14, NIST AI RMF, agentic ops, action gateway, enterprise architect, enterprise AI governance, coding agent circuit breaker, token waste prevention, AI agent approval, AI oversight, pre-execution control, AI compliance, LLM agent safety, multi-agent systems, webhook approval, autonomous agent control",
     "featureList": [
       "Pre-execution action interception",
@@ -562,7 +562,7 @@
       "@type": "Organization",
       "name": "Develop Digitally Limited",
       "url": "https://developdigitally.com",
-      "contactPoint": {"@type": "ContactPoint", "email": "hello@oversight.dev", "contactType": "customer support"}
+      "contactPoint": {"@type": "ContactPoint", "email": "hello@getheed.ai", "contactType": "customer support"}
     },
     "sameAs": [
       "https://github.com/xandgate"
@@ -583,13 +583,13 @@
           <path d="M5.5 8L7 9.5L10.5 6"/>
         </svg>
       </div>
-      Oversight
+      Heed
     </a>
     <div class="nav-links">
       <a href="#how-it-works">How it works</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
-      <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Get API key →</a>
+      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Get API key →</a>
     </div>
   </div>
 </nav>
@@ -602,12 +602,12 @@
       EU AI Act Article 14 compliance ready
     </div>
     <h1>Your agents are taking<br /><span>real-world actions.</span><br />Who's checking?</h1>
-    <p class="hero-sub">Oversight intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail.</p>
+    <p class="hero-sub">Heed intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail.</p>
     <div class="hero-ctas">
-      <a href="#" class="btn btn-primary btn-lg">Get your API key →</a>
+      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary btn-lg">Get your API key →</a>
       <a href="#how-it-works" class="btn btn-secondary btn-lg">See how it works</a>
     </div>
-    <p class="hero-compat">Works with <span>LangChain, OpenAI Agents SDK, AutoGen, CrewAI</span>, or plain HTTP.<br />If your agent can POST, it can use Oversight.</p>
+    <p class="hero-compat">Works with <span>LangChain, OpenAI Agents SDK, AutoGen, CrewAI</span>, or plain HTTP.<br />If your agent can POST, it can use Heed.</p>
 
     <!-- Live feed -->
     <div style="margin-top: 48px;">
@@ -663,12 +663,12 @@
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-copy">
-          <h3>Your agent calls Oversight before acting</h3>
+          <h3>Your agent calls Heed before acting</h3>
           <p style="margin-top:8px;">A single POST before any consequential action. Include what the agent wants to do, why, and where to send the decision.</p>
         </div>
         <div class="code-block step-code">
 <span class="verb">POST</span> <span class="url">/api/v1/hitl/requests</span>
-<span class="comm">X-API-Key: oa_live_...</span>
+<span class="comm">X-API-Key: hd_live_...</span>
 
 <span class="punct">{</span>
   <span class="key">"action"</span><span class="punct">:</span> <span class="str">"send_refund"</span><span class="punct">,</span>
@@ -718,7 +718,7 @@
 <span class="punct">}</span>
 
 <span class="comm">// Signed with HMAC-SHA256</span>
-<span class="comm">// X-OA-Signature: sha256=...</span></div>
+<span class="comm">// X-Heed-Signature: sha256=...</span></div>
       </div>
 
     </div>
@@ -731,7 +731,7 @@
     <div class="callout">
       <span class="label">Not observability. Control.</span>
       <h2>Your competitors watch what agents did.<br />We control what they're <em>allowed</em> to do.</h2>
-      <p>LangSmith, Langfuse and Humanloop are post-mortems. Oversight is a gate.</p>
+      <p>LangSmith, Langfuse and Humanloop are post-mortems. Heed is a gate.</p>
       <div class="callout-comparison">
         <div class="compare-box them">
           <div class="compare-label">Observability tools</div>
@@ -740,7 +740,7 @@
         </div>
         <div class="vs-divider">vs</div>
         <div class="compare-box us">
-          <div class="compare-label">Oversight</div>
+          <div class="compare-label">Heed</div>
           <h3>Can my agent do this?</h3>
           <p style="font-size:0.85rem;">Intercept before execution. Human confirms. Then it happens — with a logged, audited paper trail.</p>
         </div>
@@ -793,7 +793,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         </div>
         <h3>Multi-tenant</h3>
-        <p>Separate tenants, API keys, policies and audit logs per product or client. Stripe-style <code style="font-size:0.78rem; color:var(--accent);">oa_live_</code> / <code style="font-size:0.78rem; color:var(--muted-2);">oa_test_</code> key format.</p>
+        <p>Separate tenants, API keys, policies and audit logs per product or client. Stripe-style <code style="font-size:0.78rem; color:var(--accent);">hd_live_</code> / <code style="font-size:0.78rem; color:var(--muted-2);">hd_test_</code> key format.</p>
       </div>
 
       <div class="feature">
@@ -801,7 +801,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
         <h3>Framework agnostic</h3>
-        <p>Any language. Any agent framework. LangChain, OpenAI Agents SDK, AutoGen, CrewAI — or plain HTTP. If it can POST, it can use Oversight.</p>
+        <p>Any language. Any agent framework. LangChain, OpenAI Agents SDK, AutoGen, CrewAI — or plain HTTP. If it can POST, it can use Heed.</p>
       </div>
 
     </div>
@@ -818,7 +818,7 @@
         <p>"High-risk AI systems shall be designed and developed in such a way, including with appropriate human-machine interface tools, that they can be effectively overseen by natural persons during the period in which the AI system is in use."</p>
         <cite>— EU AI Act, Article 14 (Human Oversight)</cite>
       </div>
-      <p style="font-size:0.9rem;">If your agents touch healthcare, finance, legal, government, HR, or critical infrastructure, Article 14 applies. Oversight gives you the human control layer and the audit trail to prove it.</p>
+      <p style="font-size:0.9rem;">If your agents touch healthcare, finance, legal, government, HR, or critical infrastructure, Article 14 applies. Heed gives you the human control layer and the audit trail to prove it.</p>
     </div>
     <div>
       <ul class="euai-list">
@@ -854,7 +854,7 @@
           <li>7-day audit log retention</li>
           <li>1 tenant</li>
         </ul>
-        <div class="plan-cta"><a href="#" class="btn btn-secondary" style="width:100%; justify-content:center;">Get started →</a></div>
+        <div class="plan-cta"><a href="https://heed.run/api/v1/auth/signup" class="btn btn-secondary" style="width:100%; justify-content:center;">Get started →</a></div>
       </div>
 
       <div class="plan">
@@ -869,7 +869,7 @@
           <li>30-day audit log retention</li>
           <li>3 tenants</li>
         </ul>
-        <div class="plan-cta"><a href="#" class="btn btn-secondary" style="width:100%; justify-content:center;">Get started →</a></div>
+        <div class="plan-cta"><a href="https://heed.run/api/v1/auth/signup" class="btn btn-secondary" style="width:100%; justify-content:center;">Get started →</a></div>
       </div>
 
       <div class="plan featured">
@@ -887,7 +887,7 @@
           <li>HMAC-signed webhooks</li>
           <li>Priority support</li>
         </ul>
-        <div class="plan-cta"><a href="#" class="btn btn-primary" style="width:100%; justify-content:center;">Get started →</a></div>
+        <div class="plan-cta"><a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary" style="width:100%; justify-content:center;">Get started →</a></div>
       </div>
 
       <div class="plan">
@@ -917,8 +917,8 @@
     <h2>Your agents are already running.<br />Make sure someone's watching.</h2>
     <p>Free to start. One API call to integrate. Works with every agent framework.</p>
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <a href="#" class="btn btn-primary btn-lg">Get your API key — it's free →</a>
-      <a href="#" class="btn btn-secondary btn-lg">Read the docs</a>
+      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary btn-lg">Get your API key — it's free →</a>
+      <a href="https://heed.run/docs" class="btn btn-secondary btn-lg">Read the docs</a>
     </div>
   </div>
 </section>
@@ -926,12 +926,12 @@
 <!-- ── Footer ────────────────────────────────────────────────────────── -->
 <footer>
   <div class="container footer-inner">
-    <p>© 2026 Oversight. Built by <a href="https://developdigitally.com" style="color:var(--muted-2); text-decoration:none;">Develop Digitally</a>.</p>
+    <p>© 2026 Heed. Built by <a href="https://developdigitally.com" style="color:var(--muted-2); text-decoration:none;">Develop Digitally</a>.</p>
     <div class="footer-links">
-      <a href="#">Docs</a>
+      <a href="https://heed.run/docs">Docs</a>
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
-      <a href="mailto:hello@oversight.dev">Contact</a>
+      <a href="mailto:hello@getheed.ai">Contact</a>
     </div>
   </div>
 </footer>
