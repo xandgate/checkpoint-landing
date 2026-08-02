@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heed — Plugin-enforced governance for AI agents</title>
+  <meta name="description" content="Your AI agent can't skip this. Heed intercepts tool calls inside the harness — before they execute." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --text: #e8e8e8;
+      --muted: #666666;
+      --accent: #4ade80;
+      --accent-dim: rgba(74,222,128,0.08);
+      --accent-mid: rgba(74,222,128,0.15);
+      --rejected: #f87171;
+    }
+
+    .reveal-viewport { background: var(--bg); }
+
+    .reveal {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 26px;
+      color: var(--text);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-transform: none;
+      text-shadow: none;
+      color: var(--text);
+    }
+
+    .reveal h1 { font-size: 2.6em; line-height: 1.15; }
+    .reveal h2 { font-size: 1.6em; line-height: 1.25; }
+    .reveal h3 { font-size: 1.1em; font-weight: 600; }
+
+    .reveal p, .reveal li {
+      color: #999;
+      line-height: 1.7;
+    }
+
+    .reveal strong { color: var(--text); font-weight: 600; }
+    .reveal em { color: var(--accent); font-style: normal; }
+    .reveal code { font-family: 'JetBrains Mono', monospace; color: var(--accent); background: var(--accent-dim); padding: 2px 8px; border-radius: 4px; font-size: 0.85em; }
+
+    .reveal ul { list-style: none; padding-left: 0; }
+    .reveal ul li { padding: 8px 0; position: relative; padding-left: 28px; }
+    .reveal ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+
+    .reveal .slide-number { color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.6em; }
+
+    /* Hero */
+    .reveal .hero h1 span { color: var(--accent); }
+    .reveal .hero p { font-size: 1em; color: var(--muted); }
+
+    /* Step grid */
+    .reveal .steps .step-grid { display: grid; grid-template-columns: 60px 1fr; gap: 12px 20px; margin-top: 32px; text-align: left; }
+    .reveal .steps .step-num { font-family: 'JetBrains Mono', monospace; font-size: 1.8em; font-weight: 700; color: var(--accent); line-height: 1; }
+    .reveal .steps .step-text p { margin: 0; }
+    .reveal .steps .step-text strong { color: var(--accent); }
+
+    /* Privacy */
+    .reveal .privacy-block { margin-top: 28px; padding: 20px 28px; border: 1px solid var(--accent-mid); border-radius: 8px; background: var(--accent-dim); font-size: 0.9em; color: var(--muted); line-height: 1.7; }
+
+    /* CTA */
+    .reveal .cta { display: inline-block; margin-top: 28px; padding: 14px 36px; background: var(--accent); color: #000; font-weight: 700; font-size: 1em; border-radius: 8px; text-decoration: none; border-bottom: none; transition: transform 0.2s; }
+    .reveal .cta:hover { transform: translateY(-2px); border-bottom: none; }
+    .reveal .muted-link { color: var(--muted); font-size: 0.8em; margin-top: 16px; display: inline-block; text-decoration: none; border-bottom: 1px solid #333; }
+    .reveal .muted-link:hover { border-bottom-color: var(--muted); }
+
+    /* Center helper */
+    .reveal .center { text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- 1 ── Hero ────────────────────────────────────── -->
+<section class="hero">
+  <p style="font-size:0.85em; color:var(--rejected); margin-bottom:20px;">Your agent just pushed to production without asking.</p>
+  <h1>Govern AI agents<br/>at the <span>execution layer</span></h1>
+  <p>Heed intercepts tool calls inside the harness — before they execute.<br/>The agent can't bypass it. Zero API calls on the hot path.</p>
+</section>
+
+<!-- 2 ── How it works ────────────────────────────── -->
+<section class="steps">
+  <h2>How it works</h2>
+  <div class="step-grid">
+    <div class="step-num">1</div>
+    <div class="step-text"><p><strong>Agent makes a tool call</strong> — <code>git push origin main</code></p></div>
+    <div class="step-num">2</div>
+    <div class="step-text"><p><strong>Plugin classifies it</strong> — deployment, risk: high (<1ms, local)</p></div>
+    <div class="step-num">3</div>
+    <div class="step-text"><p><strong>Policy match → gate</strong> — blocked until you approve</p></div>
+    <div class="step-num">4</div>
+    <div class="step-text"><p><strong>You decide</strong> — approve or deny. Everything logged.</p></div>
+  </div>
+  <p style="margin-top:24px; font-size:0.85em; color:var(--muted);">No policy match? Pass-through in under 5ms. You forget it's there.</p>
+</section>
+
+<!-- 3 ── Privacy ─────────────────────────────────── -->
+<section>
+  <h2>Your token stream stays local</h2>
+  <ul>
+    <li>Classification runs <strong>in-process</strong> — no API calls, no cloud</li>
+    <li>Only denied and high-risk actions feed the shared classifier</li>
+    <li><strong>99%+ of tool calls never leave your machine</strong></li>
+  </ul>
+  <div class="privacy-block">
+    Enterprise on-prem: zero data egress. The shared classifier is optional.<br/>
+    We can't govern what we can't see. We don't want to see what we don't need.
+  </div>
+</section>
+
+<!-- 4 ── Install ─────────────────────────────────── -->
+<section class="center">
+  <h2>Five minutes to shadow mode</h2>
+  <p>Install the plugin. Classify and log every tool call. <strong>Nothing is blocked</strong> — observe first, gate later.</p>
+  <p>Plugins for <strong>Hermes</strong>, <strong>OpenClaw</strong>, <strong>Claude Code</strong>, <strong>Cursor</strong>.<br/>Any harness with hooks? <a href="https://github.com/xandgate/oversight-platform">Build your own adapter</a>.</p>
+</section>
+
+<!-- 5 ── CTA ─────────────────────────────────────── -->
+<section class="center">
+  <h2>Stop hoping your agents follow the rules.</h2>
+  <p>Start enforcing them.</p>
+  <a href="https://takeheed.ai" class="cta">Get started →</a>
+  <br/>
+  <a href="https://github.com/xandgate/oversight-platform" class="muted-link">Open source on GitHub</a>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    margin: 0.06,
+    width: 1280,
+    height: 720,
+    controls: false,
+    progress: false,
+    center: true,
+    touch: true,
+    keyboard: true,
+  });
+</script>
+
+</body>
+</html>
