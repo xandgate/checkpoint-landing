@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Heed — Human approval for AI agent actions</title>
-  <meta name="description" content="Heed intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail." />
+  <title>Heed — Enforced governance for AI agents</title>
+  <meta name="description" content="Heed intercepts AI agent actions before they execute — enforced at the harness level, not cooperative. Plugin installs in 5 minutes. Full audit trail. Local-first privacy." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -537,20 +537,20 @@
     "applicationCategory": "DeveloperApplication",
     "applicationSubCategory": "AI Agent Governance",
     "operatingSystem": "Any (cloud API, no installation required)",
-    "description": "Heed is a human-in-the-loop (HITL) action gateway for AI agents. It sits between an AI agent and its actions — intercepting intended actions before execution, evaluating them against policies, notifying humans via email, Slack, or Telegram for one-click approval or rejection, and returning the decision to the agent via webhook. No SDK required. EU AI Act Article 14 compliant. Used for AI agent governance, coding agent circuit-breaking, token waste prevention, and enterprise agentic ops.",
+    "description": "Heed is a plugin-enforced governance layer for AI agents. It installs inside the agent harness (Hermes, OpenClaw, Claude Code, Cursor) and intercepts every tool call before execution — classifying intent, checking policies, and gating high-risk actions for human approval. The agent cannot bypass the gate. Local-first classification with zero API calls on the hot path. EU AI Act Article 14 compliant.",
     "keywords": "HITL, human-in-the-loop, AI agent governance, EU AI Act, EU AI Act Article 14, NIST AI RMF, agentic ops, action gateway, enterprise architect, enterprise AI governance, coding agent circuit breaker, token waste prevention, AI agent approval, AI oversight, pre-execution control, AI compliance, LLM agent safety, multi-agent systems, webhook approval, autonomous agent control",
     "featureList": [
-      "Pre-execution action interception",
-      "Policy-based auto-approval",
+      "Plugin-enforced governance — agent cannot bypass",
+      "Three-tier speed model: pass-through, grace period, HITL gate",
+      "Shadow mode for zero-risk onboarding",
+      "Rule-based semantic classifier (<1ms)",
+      "Local-first classification — 99%+ of tool calls never leave your machine",
       "Human review notifications via email, Slack, and Telegram",
       "One-click approve/reject interface",
-      "Webhook-based decision delivery with HMAC-SHA256 signing",
-      "Immutable audit log",
-      "No SDK required — plain HTTP",
+      "Immutable audit log — SOC 2 and EU AI Act ready",
+      "HMAC-SHA256 signed webhook delivery",
       "EU AI Act Article 14 compliance support",
-      "NIST AI RMF alignment",
-      "Coding agent circuit breaker",
-      "Multi-tenant policy engine"
+      "Multi-harness: Hermes, OpenClaw, Claude Code, Cursor"
     ],
     "offers": [
       {"@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD", "description": "100 requests per month, no credit card required"},
@@ -589,7 +589,7 @@
       <a href="#how-it-works">How it works</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
-      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Get API key →</a>
+      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Get started →</a>
     </div>
   </div>
 </nav>
@@ -599,15 +599,15 @@
   <div class="container">
     <div class="hero-badge">
       <span class="dot"></span>
-      EU AI Act Article 14 compliance ready
+      Plugin-enforced governance · Agents can't skip it
     </div>
-    <h1>Your agents are taking<br /><span>real-world actions.</span><br />Who's checking?</h1>
-    <p class="hero-sub">Heed intercepts AI agent actions before they execute and routes them to a human for approval. One API call. Full audit trail.</p>
+    <h1>Your agent just pushed to production.<br /><span>Without asking.</span><br />Take Heed.</h1>
+    <p class="hero-sub">Heed installs inside your agent harness — intercepting every tool call before execution. The agent can't bypass it. Zero API calls on the hot path. Full audit trail.</p>
     <div class="hero-ctas">
-      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary btn-lg">Get your API key →</a>
+      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary btn-lg">Install the plugin →</a>
       <a href="#how-it-works" class="btn btn-secondary btn-lg">See how it works</a>
     </div>
-    <p class="hero-compat">Works with <span>LangChain, OpenAI Agents SDK, AutoGen, CrewAI</span>, or plain HTTP.<br />If your agent can POST, it can use Heed.</p>
+    <p class="hero-compat">Plugins for <span>Hermes, OpenClaw, Claude Code, Cursor</span>.<br />If it has a hook system, Heed enforces it.</p>
 
     <!-- Live feed -->
     <div style="margin-top: 48px;">
@@ -648,7 +648,7 @@
     </div>
     <p style="text-align:center; margin-top:32px; font-size:0.9rem;">
       These aren't hypotheticals. They're the support tickets developers are filing right now.<br/>
-      The problem isn't that your agents are bad. It's that <strong style="color:var(--text)">consequential actions need a human in the loop</strong> — and nothing in your current stack provides that.
+      The problem isn't that your agents are bad. It's that <strong style="color:var(--text)">consequential actions need a human in the loop</strong> — and cooperative gates don't work. We proved it: <strong style="color:var(--text)">agents skip them</strong>.
     </p>
   </div>
 </section>
@@ -663,8 +663,8 @@
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-copy">
-          <h3>Your agent calls Heed before acting</h3>
-          <p style="margin-top:8px;">A single POST before any consequential action. Include what the agent wants to do, why, and where to send the decision.</p>
+          <h3>The harness intercepts every tool call</h3>
+          <p style="margin-top:8px;">Before any tool executes, the Heed plugin fires. It classifies the action, checks policies, and gates it — all inside the execution pipeline. The agent can't bypass because it doesn't control this step.</p>
         </div>
         <div class="code-block step-code">
 <span class="verb">POST</span> <span class="url">/api/v1/hitl/requests</span>
@@ -684,8 +684,8 @@
       <div class="step">
         <div class="step-num">02</div>
         <div class="step-copy">
-          <h3>The right human gets notified instantly</h3>
-          <p style="margin-top:8px;">Approval cards land in Slack or email with full context. One click to approve or reject. No login required. Works on mobile.</p>
+          <h3>High-risk actions get held for approval</h3>
+          <p style="margin-top:8px;">When a policy match hits, the tool call is blocked and the right human gets notified — Slack, email, or native harness prompt. One click to approve or reject. Works on mobile.</p>
         </div>
         <div class="code-block step-code" style="background: var(--surface-2); border-color: var(--border-2); padding: 20px;">
           <div style="font-size:0.8rem; color:var(--muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.06em;">Slack notification</div>
@@ -703,8 +703,8 @@
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-copy">
-          <h3>Your agent gets the decision via webhook</h3>
-          <p style="margin-top:8px;">Decision POSTs to your callback URL with HMAC signature. The action executes. Everything is logged. You have a complete audit trail.</p>
+          <h3>Approved actions execute. Blocked ones don't.</h3>
+          <p style="margin-top:8px;">If approved, the harness executes the tool call. If denied, the agent gets a block message. Everything is logged with full context. You have a complete audit trail.</p>
         </div>
         <div class="code-block step-code">
 <span class="comm">// Webhook payload → your callback_url</span>
@@ -729,20 +729,20 @@
 <section class="section-sm">
   <div class="container">
     <div class="callout">
-      <span class="label">Not observability. Control.</span>
-      <h2>Your competitors watch what agents did.<br />We control what they're <em>allowed</em> to do.</h2>
-      <p>LangSmith, Langfuse and Humanloop are post-mortems. Heed is a gate.</p>
+      <span class="label">Not cooperative. Enforced.</span>
+      <h2>Cooperative gates fail because agents skip them.<br />Heed <em>enforces</em> — the agent can't bypass.</h2>
+      <p>MCP servers, decorators, and system prompts are suggestions. Heed is a gate the agent can't walk around.</p>
       <div class="callout-comparison">
         <div class="compare-box them">
-          <div class="compare-label">Observability tools</div>
-          <h3>What did my agent do?</h3>
-          <p style="font-size:0.85rem;">Trace and log agent actions after they happen. Great for debugging. Too late to stop the $47K refund.</p>
+          <div class="compare-label">Cooperative gates</div>
+          <h3>Will my agent call the gate?</h3>
+          <p style="font-size:0.85rem;">MCP servers, decorators, and system prompts ask the agent to check in before acting. Our dogfooding proved: 0% compliance. Agents optimize for task completion, not governance.</p>
         </div>
         <div class="vs-divider">vs</div>
         <div class="compare-box us">
           <div class="compare-label">Heed</div>
-          <h3>Can my agent do this?</h3>
-          <p style="font-size:0.85rem;">Intercept before execution. Human confirms. Then it happens — with a logged, audited paper trail.</p>
+          <h3>Can my agent bypass the gate?</h3>
+          <p style="font-size:0.85rem;">No. The plugin lives inside the harness execution pipeline. The agent outputs a tool call — the harness fires our hook before executing. The agent can't skip step 2.</p>
         </div>
       </div>
     </div>
@@ -761,7 +761,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>
         </div>
         <h3>Policy engine</h3>
-        <p>Configure rules per tenant. Actions that match auto-approve instantly. Everything else holds for human review. No code changes needed to update policies.</p>
+        <p>Rule-based classifier matches tool calls in &lt;1ms. Three tiers: pass-through (no match → execute instantly), grace period (low-risk → execute + notify), HITL gate (high-risk → block until human decides). Natural language policies coming soon.</p>
       </div>
 
       <div class="feature">
@@ -784,24 +784,24 @@
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
         </div>
-        <h3>Webhook delivery</h3>
-        <p>Decisions POST back to your callback URL, signed with HMAC-SHA256. Three retries with exponential backoff. Your agent always gets the answer.</p>
+        <h3>Shadow mode</h3>
+        <p>Install the plugin, set mode: shadow. Every tool call is classified and logged — nothing is blocked. Review the audit data, tune policies, then flip to enforce. Zero-risk onboarding.</p>
       </div>
 
       <div class="feature">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         </div>
-        <h3>Multi-tenant</h3>
-        <p>Separate tenants, API keys, policies and audit logs per product or client. Stripe-style <code style="font-size:0.78rem; color:var(--accent);">hd_live_</code> / <code style="font-size:0.78rem; color:var(--muted-2);">hd_test_</code> key format.</p>
+        <h3>Local-first privacy</h3>
+        <p>Classification happens on your machine. 99%+ of tool calls never leave your infrastructure. Only denied and high-risk calls feed the shared classifier. Enterprise: full on-prem, zero data egress.</p>
       </div>
 
       <div class="feature">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
-        <h3>Framework agnostic</h3>
-        <p>Any language. Any agent framework. LangChain, OpenAI Agents SDK, AutoGen, CrewAI — or plain HTTP. If it can POST, it can use Heed.</p>
+        <h3>Multi-harness</h3>
+        <p>Plugins for Hermes (Grade A), OpenClaw (Grade A), Claude Code (Grade B), and Cursor (Grade B). Same classifier, same policies, same audit trail across every harness your team uses.</p>
       </div>
 
     </div>
@@ -828,7 +828,7 @@
         <li>Immutable append-only event log — tamper-evident</li>
         <li>Configurable approval expiry and escalation</li>
         <li>On-premise deployment available for sovereign data requirements</li>
-        <li>MCP-native integration for Anthropic Claude and compatible agents</li>
+        <li>Plugin-enforced governance — agents cannot bypass the gate</li>
       </ul>
     </div>
   </div>
@@ -848,9 +848,9 @@
         <div class="plan-desc">For evaluation and personal projects</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>100 requests / month</li>
-          <li>1 policy rule</li>
-          <li>Email notifications</li>
+          <li>5,000 evaluations / month</li>
+          <li>10 policy rules</li>
+          <li>Shadow + enforce modes</li>
           <li>7-day audit log retention</li>
           <li>1 tenant</li>
         </ul>
@@ -863,10 +863,10 @@
         <div class="plan-desc">For small teams shipping agents</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>2,500 requests / month</li>
-          <li>5 policy rules</li>
+          <li>100,000 evaluations / month</li>
+          <li>Custom policies</li>
           <li>Email + Slack</li>
-          <li>30-day audit log retention</li>
+          <li>Full audit trail</li>
           <li>3 tenants</li>
         </ul>
         <div class="plan-cta"><a href="https://heed.run/api/v1/auth/signup" class="btn btn-secondary" style="width:100%; justify-content:center;">Get started →</a></div>
@@ -875,16 +875,16 @@
       <div class="plan featured">
         <div class="plan-badge">Most popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price">$99<span>/mo</span></div>
+        <div class="plan-price">$199<span>/mo</span></div>
         <div class="plan-desc">For teams running agents in production</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>25,000 requests / month</li>
+          <li>500,000 evaluations / month</li>
           <li>Unlimited policy rules</li>
-          <li>Email, Slack, Telegram, webhooks</li>
+          <li>Custom classifier training</li>
           <li>1-year audit log retention</li>
           <li>Unlimited tenants</li>
-          <li>HMAC-signed webhooks</li>
+          <li>SOC 2 reports</li>
           <li>Priority support</li>
         </ul>
         <div class="plan-cta"><a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary" style="width:100%; justify-content:center;">Get started →</a></div>
@@ -914,10 +914,10 @@
 <!-- ── Final CTA ─────────────────────────────────────────────────────── -->
 <section class="final-cta">
   <div class="container">
-    <h2>Your agents are already running.<br />Make sure someone's watching.</h2>
-    <p>Free to start. One API call to integrate. Works with every agent framework.</p>
+    <h2>Your agents are already running.<br />Make sure they're <em>governed</em>.</h2>
+    <p>Free to start. Plugin installs in 5 minutes. Works with every major agent harness.</p>
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary btn-lg">Get your API key — it's free →</a>
+      <a href="https://heed.run/api/v1/auth/signup" class="btn btn-primary btn-lg">Install the plugin — it's free →</a>
       <a href="https://heed.run/docs" class="btn btn-secondary btn-lg">Read the docs</a>
     </div>
   </div>
