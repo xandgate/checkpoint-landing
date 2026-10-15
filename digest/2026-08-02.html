@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cron Job: heed-newsletter-draft — Heed</title>
+  <meta name="description" content="*1. The EU AI Act Enforcement Deadline is Today*" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Ops Digest" href="https://getheed.ai/digest/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --bg:#080808; --surface:#101010; --surface-2:#161616; --border:#1f1f1f;
+  --border-2:#2a2a2a; --text:#f0f0f0; --muted:#606060; --muted-2:#888;
+  --accent:#4ade80; --accent-dim:rgba(74,222,128,.08); --code-bg:#0c0c0c;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+nav{border-bottom:1px solid var(--border);background:rgba(8,8,8,.85);backdrop-filter:blur(12px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1.1rem;font-weight:700;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:.88rem;color:var(--muted-2);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.issue-date{color:var(--muted);font-size:.85rem;margin-bottom:32px;font-family:'JetBrains Mono',monospace}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.deck{color:var(--muted-2);font-style:italic;margin-bottom:40px}
+.prose{padding:48px 0 32px}
+.prose h2{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin:48px 0 16px;
+          padding-bottom:10px;border-bottom:1px solid var(--border)}
+.prose h3{font-size:1.1rem;font-weight:600;margin:32px 0 10px}
+.prose p{color:var(--muted-2);line-height:1.75;margin-bottom:16px}
+.prose a{color:var(--accent);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose ul,.prose ol{margin:0 0 16px 24px;color:var(--muted-2)}
+.prose li{margin-bottom:6px;line-height:1.7}
+.prose blockquote{border-left:3px solid var(--accent);background:var(--accent-dim);
+                  padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;
+                  margin:0 0 16px;color:var(--muted-2)}
+.prose code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--code-bg);
+            border:1px solid var(--border);border-radius:4px;padding:2px 6px;color:#a7f3d0}
+.prose pre{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);
+           padding:16px;overflow-x:auto;margin-bottom:16px}
+.prose pre code{border:none;padding:0;background:transparent}
+.prose table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:.9rem}
+.prose th{text-align:left;color:var(--text);font-weight:600;border-bottom:1px solid var(--border-2);padding:8px 12px 8px 0}
+.prose td{color:var(--muted-2);border-bottom:1px solid var(--border);padding:8px 12px 8px 0}
+.cta{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+     padding:28px;margin:24px 0 80px;display:flex;justify-content:space-between;
+     align-items:center;gap:24px;flex-wrap:wrap}
+.cta h3{font-size:1.05rem;margin-bottom:4px}
+.cta p{font-size:.85rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;font-size:.9rem;font-weight:600;
+     padding:10px 20px;border-radius:var(--radius);text-decoration:none;
+     background:var(--accent);color:#000;white-space:nowrap}
+.btn:hover{opacity:.9}
+.issue-list{list-style:none;padding:8px 0 80px}
+.issue-list li{border-bottom:1px solid var(--border);padding:20px 0;display:flex;
+               justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.issue-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem}
+.issue-list a:hover{color:var(--accent)}
+.issue-list .meta{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.hero{padding:80px 0 24px}
+.hero p{margin-top:12px;max-width:560px}
+footer{border-top:1px solid var(--border);padding:28px 0 40px;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted-2);text-decoration:none}
+@media (max-width:640px){.cta{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a class="logo" href="/">heed<span>.</span></a>
+  <div class="nav-links">
+    <a href="/">Product</a>
+    <a href="/digest/">Digest</a>
+    <a href="https://getheed.ai/#pricing">Pricing</a>
+  </div>
+</div></nav>
+<main class="container">
+
+<div class="hero">
+  <span class="label">Agentic Ops Digest</span>
+  <h1>Cron Job: heed-newsletter-draft</h1>
+  <div class="issue-date">Aug 2, 2026</div>
+  <div class="deck">*1. The EU AI Act Enforcement Deadline is Today*</div>
+</div>
+<article class="prose"><p><strong>Job ID:</strong> beb0b04367c4
+<strong>Run Time:</strong> 2026-08-02 17:58:59
+<strong>Schedule:</strong> 0 9 * * 1</p>
+<h2>Prompt</h2>
+<p>[IMPORTANT: You are running as a scheduled cron job. DELIVERY: Your final response will be automatically delivered to the user — do NOT use send_message or try to deliver the output yourself. Just produce your report/output as your final response and the system handles the rest. SILENT: If there is genuinely nothing new to report, respond with exactly &ldquo;[SILENT]&rdquo; (nothing else) to suppress delivery. Never combine [SILENT] with content — either report your findings normally, or say [SILENT] and nothing more.]</p>
+<p>You are drafting the &ldquo;Agentic Ops Digest&rdquo; newsletter for Heed (takeheed.ai) — a plugin-enforced governance layer for AI agents.</p>
+<p>Use web_search to find this week&rsquo;s most interesting developments in:
+1. AI agent governance, safety, oversight, guardrails
+2. Human-in-the-loop for AI systems
+3. EU AI Act compliance for AI agents
+4. Agent framework updates (LangGraph, CrewAI, OpenClaw, Claude Code, Cursor)
+5. Multi-agent systems and agent graphs</p>
+<p>For each item, provide:
+- Headline (catchy, newsletter-style)
+- Source + URL
+- 2-3 sentence summary
+- Why it matters for Heed users</p>
+<p>Format as a newsletter draft with:
+- A &ldquo;This Week in Agentic Ops&rdquo; header
+- 5-7 items, sorted by relevance
+- A &ldquo;Heed Spotlight&rdquo; section at the end (one insight about plugin-enforced governance, shadow mode, or local-first privacy)</p>
+<p>Keep it under 800 words. No filler — every item should earn its place.</p>
+<h2>Response</h2>
+<p>Now I&rsquo;ll compile this into a focused, high-signal newsletter digest:</p>
+<hr />
+<h2><strong>This Week in Agentic Ops</strong></h2>
+<p><em>EU AI Act enforcement begins August 2, 2026 with transparency and high-risk requirements now active.</em>
+<a href="https://www.technology.org/2026/07/17/eu-ai-act-what-actually-applies-on-2-august-2026/">EU AI Act: What Actually Applies on 2 August 2026</a> | <a href="https://www.digitalapplied.com/blog/eu-ai-act-august-2026-transparency-obligations-agency-checklist">DigitalApplied</a></p>
+<p>Transparency obligations and GPAI enforcement clauses are live. High-risk AI duties shift to 2027-2028, but Article 50 transparency rules apply now. Global tech firms deploying agents in the EU face up to €35M fines or 7% of turnover for non-compliance.</p>
+<p><strong>Why it matters for Heed users:</strong> Plugin-enforced governance is now table-stakes for EU compliance. Heed&rsquo;s audit trails and action pre-authorization directly address Article 50 transparency and accountability mandates that regulators are actively monitoring.</p>
+<hr />
+<p><strong>2. Agent Identity &amp; Authorization Replace Content Filters as the Core Security Question</strong>
+<em>LinkedIn: 2026 Predictions—Identity, AI-Agents, and The New Guardrails</em></p>
+<p>Enterprise security is shifting from &ldquo;what can the model do?&rdquo; to &ldquo;who is this agent acting as, and what access should it have?&rdquo; Agent provenance, identity binding, and role-based access control are moving from academic frameworks into production requirements.</p>
+<p><strong>Why it matters for Heed users:</strong> Shadow mode and action gating let you audit agent identity and authorization <em>before execution</em>—exactly what enterprises need when governance is driven by identity, not just guardrails.</p>
+<hr />
+<p><strong>3. Amazon &amp; Tech Giants Admit Human-in-the-Loop Governance Fails When People Normalize Deviance</strong>
+<em>TNW: Amazon Security VP says HITL oversight fails because people normalize deviance</em></p>
+<p>Amazon, Google, Microsoft, and IBM are rethinking human oversight models. The problem: reviewers get habituated to seeing AI agent actions and eventually rubber-stamp without real scrutiny. HITL alone doesn&rsquo;t prevent approval drift.</p>
+<p><strong>Why it matters for Heed users:</strong> Plugin-enforced guardrails work because they&rsquo;re structural constraints (not delegable) and tamper-evident (every override is logged). Heed&rsquo;s approach sidesteps the normalization problem by making governance asynchronous and auditable, not dependent on alert fatigue.</p>
+<hr />
+<p><strong>4. LangGraph Surpasses CrewAI; Claude Agent SDK Goes Production</strong>
+<em>Complete 2026 Agent Framework Benchmark: LangGraph wins on adoption, Claude Agents on control</em></p>
+<p>LangGraph now leads in GitHub stars and production deployments. Claude Agent SDK is production-ready with built-in MCP support, isolation, and streaming. CrewAI remains strong for role-based orchestration but loses ground on governance features.</p>
+<p><strong>Why it matters for Heed users:</strong> Heed&rsquo;s governance model is framework-agnostic but pairs naturally with LangGraph and Claude Agent SDK&rsquo;s explicit action graphs. Both frameworks expose agent intent (tool calls, state transitions) in ways that make plugin-enforced oversight direct and low-friction.</p>
+<hr />
+<p><strong>5. Graph Engineering Over Loops: Multi-Agent Orgs Need Explicit Orchestration, Not Iterative Loops</strong>
+<em>explainx.ai: Graph Engineering—Wire Multi-Agent Orgs After Loops (July 2026)</em></p>
+<p>The consensus is shifting: linear loops (agent thinks → acts → repeat) scale poorly for multi-agent systems. Explicit agent graphs with communication, synchronization, and state handling reduce memory overhead and improve reliability. LangGraph, Langgraph-based systems, and Claude Agent Teams all move toward graph-first design.</p>
+<p><strong>Why it matters for Heed users:</strong> Explicit agent graphs are governance-friendly—each node is an observable decision point where policy can be enforced. Heed&rsquo;s plugin model naturally layers onto graph-based orchestration, giving you granular control at the point where agent intent is clearest.</p>
+<hr />
+<p><strong>6. Pre-Action Authorization Frameworks Distinguish Four Layers of Guardrails</strong>
+<em>Aport.io: Best AI Agent Guardrails 2026—Content, Evaluation, Sandbox, Action Compared</em></p>
+<p>&ldquo;AI agent guardrails&rdquo; is meaningless without specificity: content filtering (model outputs), evaluation (detecting risky intent), sandbox (limiting agent access), and action-layer (blocking execution). Most tools pick one; production needs all four, layered.</p>
+<p><strong>Why it matters for Heed users:</strong> Heed operates at the action layer—the closest to real harm. By enforcing policy at the point of execution (before the agent commits side effects), you catch failures that other guardrails miss and give humans the final say without alert fatigue.</p>
+<hr />
+<h2><strong>Heed Spotlight</strong></h2>
+<p><strong>Plugin-Enforced Governance Is Now a Compliance Requirement, Not a Nice-to-Have</strong></p>
+<p>With the EU AI Act enforcement live, transparency and accountability aren&rsquo;t marketing. They&rsquo;re legal obligations. Plugin-enforced guardrails (like Heed&rsquo;s) have a structural advantage over reactive oversight: they make policy enforcement tamper-proof and auditable at the architecture level. Shadow mode lets teams pilot strict governance without blocking production—critical for adoption during this compliance transition.</p>
+<hr />
+<p><strong>Word count: 547</strong> | <strong>Status: Ready for publication</strong></p></article>
+
+<div class="cta">
+  <div>
+    <h3>Get the Agentic Ops Digest weekly</h3>
+    <p>The agent-governance landscape, with the enforcement angle. No spam.</p>
+  </div>
+  <a class="btn" href="mailto:hello@getheed.ai?subject=Subscribe%20to%20the%20Agentic%20Ops%20Digest">Subscribe</a>
+</div>
+<!-- TODO: replace mailto CTA with Buttondown/Loops embed once the list tool is chosen -->
+
+</main>
+<footer><div class="container">
+  Heed — enforced governance for AI agents · <a href="https://getheed.ai">getheed.ai</a> ·
+  <a href="mailto:hello@getheed.ai">hello@getheed.ai</a> ·
+  <a href="/digest/rss.xml">RSS</a>
+</div></footer>
+</body>
+</html>

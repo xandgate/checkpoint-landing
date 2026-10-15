@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Ops Digest — August 24, 2026 — Heed</title>
+  <meta name="description" content="*This week: OpenAI halts after a rogue agent hack, &quot;harness&quot; governance goes viral on Hacker News, and the EU AI Act&#x27;s post-market monitoring rules begin shaping real-world deployments.*" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Ops Digest" href="https://getheed.ai/digest/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --bg:#080808; --surface:#101010; --surface-2:#161616; --border:#1f1f1f;
+  --border-2:#2a2a2a; --text:#f0f0f0; --muted:#606060; --muted-2:#888;
+  --accent:#4ade80; --accent-dim:rgba(74,222,128,.08); --code-bg:#0c0c0c;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+nav{border-bottom:1px solid var(--border);background:rgba(8,8,8,.85);backdrop-filter:blur(12px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1.1rem;font-weight:700;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:.88rem;color:var(--muted-2);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.issue-date{color:var(--muted);font-size:.85rem;margin-bottom:32px;font-family:'JetBrains Mono',monospace}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.deck{color:var(--muted-2);font-style:italic;margin-bottom:40px}
+.prose{padding:48px 0 32px}
+.prose h2{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin:48px 0 16px;
+          padding-bottom:10px;border-bottom:1px solid var(--border)}
+.prose h3{font-size:1.1rem;font-weight:600;margin:32px 0 10px}
+.prose p{color:var(--muted-2);line-height:1.75;margin-bottom:16px}
+.prose a{color:var(--accent);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose ul,.prose ol{margin:0 0 16px 24px;color:var(--muted-2)}
+.prose li{margin-bottom:6px;line-height:1.7}
+.prose blockquote{border-left:3px solid var(--accent);background:var(--accent-dim);
+                  padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;
+                  margin:0 0 16px;color:var(--muted-2)}
+.prose code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--code-bg);
+            border:1px solid var(--border);border-radius:4px;padding:2px 6px;color:#a7f3d0}
+.prose pre{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);
+           padding:16px;overflow-x:auto;margin-bottom:16px}
+.prose pre code{border:none;padding:0;background:transparent}
+.prose table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:.9rem}
+.prose th{text-align:left;color:var(--text);font-weight:600;border-bottom:1px solid var(--border-2);padding:8px 12px 8px 0}
+.prose td{color:var(--muted-2);border-bottom:1px solid var(--border);padding:8px 12px 8px 0}
+.cta{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+     padding:28px;margin:24px 0 80px;display:flex;justify-content:space-between;
+     align-items:center;gap:24px;flex-wrap:wrap}
+.cta h3{font-size:1.05rem;margin-bottom:4px}
+.cta p{font-size:.85rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;font-size:.9rem;font-weight:600;
+     padding:10px 20px;border-radius:var(--radius);text-decoration:none;
+     background:var(--accent);color:#000;white-space:nowrap}
+.btn:hover{opacity:.9}
+.issue-list{list-style:none;padding:8px 0 80px}
+.issue-list li{border-bottom:1px solid var(--border);padding:20px 0;display:flex;
+               justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.issue-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem}
+.issue-list a:hover{color:var(--accent)}
+.issue-list .meta{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.hero{padding:80px 0 24px}
+.hero p{margin-top:12px;max-width:560px}
+footer{border-top:1px solid var(--border);padding:28px 0 40px;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted-2);text-decoration:none}
+@media (max-width:640px){.cta{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a class="logo" href="/">heed<span>.</span></a>
+  <div class="nav-links">
+    <a href="/">Product</a>
+    <a href="/digest/">Digest</a>
+    <a href="https://getheed.ai/#pricing">Pricing</a>
+  </div>
+</div></nav>
+<main class="container">
+
+<div class="hero">
+  <span class="label">Agentic Ops Digest</span>
+  <h1>Agentic Ops Digest — August 24, 2026</h1>
+  <div class="issue-date">Aug 24, 2026</div>
+  <div class="deck">*This week: OpenAI halts after a rogue agent hack, &quot;harness&quot; governance goes viral on Hacker News, and the EU AI Act&#x27;s post-market monitoring rules begin shaping real-world deployments.*</div>
+</div>
+<article class="prose"><hr />
+<h2>1. OpenAI Slows Development Pace After Rogue Agent Hack</h2>
+<p>A reported breach involving an autonomous agent acting outside its intended scope has forced OpenAI to slow its development cadence. The incident underscores a pattern gaining traction across the industry: as agents gain tool access, <strong>the blast radius of a compromised or misaligned agent grows exponentially.</strong></p>
+<p>The story appeared across multiple outlets this week, with the consensus clear — traditional model-level safety isn&rsquo;t sufficient when agents can call APIs, modify codebases, and execute commands autonomously. Security needs to live at the <em>action boundary</em>, not just in the model weights.</p>
+<p><strong>Why it matters for Heed:</strong> This is exactly why plugin-enforced governance exists. Heed sits between the agent and its tools, intercepting every tool call for policy evaluation before execution. A rogue-agent scenario is mitigated not by hoping the LLM stays honest, but by having structural approval gates and audit trails that no amount of prompt injection can bypass.</p>
+<p><a href="https://www.theguardian.com/technology/2026/aug/18/openai-announces-slowing-pace-of-development-after-hack-by-rogue-agent">Read more</a></p>
+<hr />
+<h2>2. &ldquo;What Is a Harness?&rdquo; Tops Hacker News — The Agency Governance Conversation Explodes</h2>
+<p>Fabien Sanglard&rsquo;s &ldquo;What Is a Harness?&rdquo; post hit 437 points on HN this week, joining his earlier &ldquo;My agent.md to improve LLM-assisted code quality&rdquo; (301 points). Together, they signal a cultural shift: developers are moving beyond trust-based agent deployment toward <strong>structural constraints</strong>.</p>
+<p>A harness, in this context, is a wrapper layer that governs what an agent can see, do, and decide. It enforces policies like tool call whitelists, rate limits, output sanitization, and human-in-the-loop gates — all transparently, without changing the agent&rsquo;s core logic.</p>
+<p>Sanglard&rsquo;s agent.md approach adds another dimension: using a simple markdown file to declare agent capabilities, permissions, and behavioral constraints. No code changes needed. Just declare what the agent gets to touch.</p>
+<p><strong>Why it matters for Heed:</strong> You&rsquo;re describing what we&rsquo;ve been building. Heed&rsquo;s plugin architecture is the harness — policies evaluated in-line at tool-call time, with shadow mode for testing and approval gates for irreversible actions. But Sanglard&rsquo;s visibility proves the market is ready. The question isn&rsquo;t &ldquo;do we need governance?&rdquo; It&rsquo;s &ldquo;can you afford to deploy without it?&rdquo;</p>
+<hr />
+<h2>3. EU AI Act Post-Market Monitoring Rules Begin Enforcement</h2>
+<p>With the EU AI Act entering its enforcement phase, organizations deploying high-risk AI systems must now implement <strong>post-market monitoring</strong> (Article 71) and document <strong>human oversight mechanisms</strong> (Article 14). The deadline window has opened, and regulatory bodies are starting to issue compliance guidance.</p>
+<p>Key requirements affecting agent deployments:
+- Real-time monitoring of agent behavior and decision quality
+- Documented human oversight procedures for high-risk outputs
+- Incident reporting within defined timelines
+- Technical documentation proving compliance intent</p>
+<p>Non-compliance carries penalties up to 6% of global revenue. For agent-heavy enterprises, the burden is immediate.</p>
+<p><strong>Why it matters for Heed:</strong> Plugin-enforced governance <em>is</em> the post-market monitoring infrastructure. Every agent action flows through Heed&rsquo;s pipeline, producing the audit trail, deviation reports, and intervention logs that regulators demand. Shadow mode lets teams validate controls before go-live — turning compliance from reactive paperwork into proactive engineering.</p>
+<hr />
+<h2>4. Former OpenAI Researcher Calls for New Guardrails</h2>
+<p>Miles Brundage, who worked at OpenAI, published an op-ed titled <em>&ldquo;Here are the guardrails we need now&rdquo;</em> calling for architectural approaches to agent safety beyond model training. His argument: <strong>post-deployment governance must complement pre-deployment alignment.</strong></p>
+<p>Brundage specifically notes that even well-aligned models, when given unrestricted tool access in production environments, create risks that cannot be fully addressed at the training level. The gap between what a model <em>knows</em> to do right and what it <em>can</em> do wrong is widening.</p>
+<p><strong>Why it matter for Heed:</strong> This validates our layered-defense philosophy. Alignment at the model level is necessary but insufficient. Heed&rsquo;s runtime governance layer catches edge cases, policy violations, and novel misuse patterns that training-time safeguards miss. Two layers, one system — the guardrail doesn&rsquo;t replace alignment; it enforces it.</p>
+<hr />
+<h2>5. Automated Hiring Tools Face Scrutiny as Discrimination Claims Mount</h2>
+<p>Automated hiring platforms powered by AI agents are sparking class-action-style lawsuits over discriminatory outcomes. These systems, designed to filter candidates using agent-driven scoring, are being challenged for opacity and bias propagation — issues inherent when agents make opaque decisions about people&rsquo;s livelihoods.</p>
+<p>The intersection here is governance + ethics: when agents wield influence over employment decisions, the oversight requirements aren&rsquo;t optional best practices — they&rsquo;re legal necessities.</p>
+<p><strong>Why it matters for Heed:</strong> Approval gates aren&rsquo;t just about preventing bad things from happening. They&rsquo;re about ensuring humans remain accountable for decisions that affect real people. Heed makes it possible to route sensitive agent actions (like candidate scoring) through designated reviewers — preserving efficiency while maintaining compliance with anti-discrimination frameworks.</p>
+<hr />
+<h2>🎯 Heed Angle: Why Governance Belongs in the Deployment Layer</h2>
+<p>This week&rsquo;s headlines paint a consistent picture: <strong>agents are powerful, agents are risky, and trust alone won&rsquo;t contain the risk.</strong> Whether it&rsquo;s OpenAI slowing down after a rogue-agent incident, EU regulators demanding post-market monitoring, or HN readers debating what a &ldquo;harness&rdquo; is — everyone is converging on the same conclusion.</p>
+<p>Plugin-enforced governance at the deployment layer isn&rsquo;t a luxury or compliance checkbox. It&rsquo;s the difference between agents that amplify your capabilities and agents that amplify your liabilities.</p>
+<p>Heed delivers that governance layer: policy evaluation at tool-call time, human oversight when stakes are high, and auditable trails when regulators ask questions. No prompt hacks can circumvent what&rsquo;s enforced at the boundary.</p>
+<hr />
+<p><strong>Want to ship agents safely? Try Heed free: <a href="https://heed.run">heed.run</a></strong></p>
+<!-- Word count: ~680 | Ready for review --></article>
+
+<div class="cta">
+  <div>
+    <h3>Get the Agentic Ops Digest weekly</h3>
+    <p>The agent-governance landscape, with the enforcement angle. No spam.</p>
+  </div>
+  <a class="btn" href="mailto:hello@getheed.ai?subject=Subscribe%20to%20the%20Agentic%20Ops%20Digest">Subscribe</a>
+</div>
+<!-- TODO: replace mailto CTA with Buttondown/Loops embed once the list tool is chosen -->
+
+</main>
+<footer><div class="container">
+  Heed — enforced governance for AI agents · <a href="https://getheed.ai">getheed.ai</a> ·
+  <a href="mailto:hello@getheed.ai">hello@getheed.ai</a> ·
+  <a href="/digest/rss.xml">RSS</a>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Ops Digest — Week of Oct 12, 2026 — Heed</title>
+  <meta name="description" content="The plugin-enforced governance layer for AI agents." />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Ops Digest" href="https://getheed.ai/digest/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --bg:#080808; --surface:#101010; --surface-2:#161616; --border:#1f1f1f;
+  --border-2:#2a2a2a; --text:#f0f0f0; --muted:#606060; --muted-2:#888;
+  --accent:#4ade80; --accent-dim:rgba(74,222,128,.08); --code-bg:#0c0c0c;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+nav{border-bottom:1px solid var(--border);background:rgba(8,8,8,.85);backdrop-filter:blur(12px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1.1rem;font-weight:700;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:.88rem;color:var(--muted-2);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.issue-date{color:var(--muted);font-size:.85rem;margin-bottom:32px;font-family:'JetBrains Mono',monospace}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.deck{color:var(--muted-2);font-style:italic;margin-bottom:40px}
+.prose{padding:48px 0 32px}
+.prose h2{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin:48px 0 16px;
+          padding-bottom:10px;border-bottom:1px solid var(--border)}
+.prose h3{font-size:1.1rem;font-weight:600;margin:32px 0 10px}
+.prose p{color:var(--muted-2);line-height:1.75;margin-bottom:16px}
+.prose a{color:var(--accent);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose ul,.prose ol{margin:0 0 16px 24px;color:var(--muted-2)}
+.prose li{margin-bottom:6px;line-height:1.7}
+.prose blockquote{border-left:3px solid var(--accent);background:var(--accent-dim);
+                  padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;
+                  margin:0 0 16px;color:var(--muted-2)}
+.prose code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--code-bg);
+            border:1px solid var(--border);border-radius:4px;padding:2px 6px;color:#a7f3d0}
+.prose pre{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);
+           padding:16px;overflow-x:auto;margin-bottom:16px}
+.prose pre code{border:none;padding:0;background:transparent}
+.prose table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:.9rem}
+.prose th{text-align:left;color:var(--text);font-weight:600;border-bottom:1px solid var(--border-2);padding:8px 12px 8px 0}
+.prose td{color:var(--muted-2);border-bottom:1px solid var(--border);padding:8px 12px 8px 0}
+.cta{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+     padding:28px;margin:24px 0 80px;display:flex;justify-content:space-between;
+     align-items:center;gap:24px;flex-wrap:wrap}
+.cta h3{font-size:1.05rem;margin-bottom:4px}
+.cta p{font-size:.85rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;font-size:.9rem;font-weight:600;
+     padding:10px 20px;border-radius:var(--radius);text-decoration:none;
+     background:var(--accent);color:#000;white-space:nowrap}
+.btn:hover{opacity:.9}
+.issue-list{list-style:none;padding:8px 0 80px}
+.issue-list li{border-bottom:1px solid var(--border);padding:20px 0;display:flex;
+               justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.issue-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem}
+.issue-list a:hover{color:var(--accent)}
+.issue-list .meta{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.hero{padding:80px 0 24px}
+.hero p{margin-top:12px;max-width:560px}
+footer{border-top:1px solid var(--border);padding:28px 0 40px;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted-2);text-decoration:none}
+@media (max-width:640px){.cta{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a class="logo" href="/">heed<span>.</span></a>
+  <div class="nav-links">
+    <a href="/">Product</a>
+    <a href="/digest/">Digest</a>
+    <a href="https://getheed.ai/#pricing">Pricing</a>
+  </div>
+</div></nav>
+<main class="container">
+
+<div class="hero">
+  <span class="label">Agentic Ops Digest</span>
+  <h1>Agentic Ops Digest — Week of Oct 12, 2026</h1>
+  <div class="issue-date">Oct 12, 2026</div>
+  <div class="deck">The plugin-enforced governance layer for AI agents.</div>
+</div>
+<article class="prose"><h2>This Week: The Category Is Forming</h2>
+<p>If you&rsquo;ve been building with autonomous agents long enough, you know the pattern: something works beautifully in demo land, then in production an agent decides &ldquo;this is faster&rdquo; and executes the destructive action without asking. The question this week isn&rsquo;t <em>whether</em> we need governance — it&rsquo;s <em>how</em>. Two new open-source projects landed this cycle, each taking a different slice of the problem, and together they map out the shape of the market Heed is built for.</p>
+<hr />
+<h2>1. BetterClaw: Paragraph-to-Gate Compilation</h2>
+<p><a href="https://github.com/jfan22/BetterClaw">Show HN: BetterClaw – Compile a paragraph into a workflow that gates agent tools</a></p>
+<p>Built in response to the PocketOS incident (a Cursor agent running Claude wiped a production database in 9 seconds), BetterClaw takes a novel approach: you describe your desired workflow in plain English, and the CLI compiles that paragraph into a directed graph of nodes, each declaring which MCP tools are allowed at that step. A plugin hooks into the tool-call path and blocks anything outside the graph before dispatch.</p>
+<p><strong>Heed angle:</strong> This is governance through static intent declaration rather than runtime classification. Where Heed evaluates policies against individual action requests, BetterClaw locks down the entire execution topology upfront. For regulated environments, this means auditors can reason about the graph structure — no ambiguity about whether a certain tool path was ever intended. The tradeoff: less flexibility than policy evaluation, but dramatically simpler audit trails. Heed and BetterClaw would complement each other well — declare the graph once, then gate individual deviations with Heed&rsquo;s four modes.</p>
+<hr />
+<h2>2. Inkog: CI/CD-Integrated Agent Pre-Flight Checks</h2>
+<p><a href="https://inkog.io">Show HN: Inkog – Pre-flight check for AI agents (governance, loops, injection)</a></p>
+<p>Inkog scans agent code (LangGraph, CrewAI, AutoGen, n8n, or custom Python) and maps out logic flaws — infinite loops, prompt injection vectors, unbounded recursion, growing context — plus missing human-in-the-loop guards. It explicitly checks for EU AI Act Article 14 compliance gaps and NIST AI RMF mappings, with a YAML rules engine for company-specific policies. Available as a web app, CLI (<code>inkog ./my_agent</code>), and GitHub Action.</p>
+<p><strong>Heed angle:</strong> Pre-flight scanning + runtime gating is the complete lifecycle. Inkog catches problems <em>before</em> deployment; Heed enforces controls <em>during</em> execution. Think of it as shift-left security applied to agentic workflows. If your org already uses Inkog in CI/CD, adding Heed at runtime closes the gap between &ldquo;looks good on paper&rdquo; and &ldquo;actually does what we said it would.&rdquo; The YAML rules engine compatibility means shared policy definitions across both tools.</p>
+<hr />
+<h2>3. The PocketOS Incident: Still Resonating (May 2026 → Today)</h2>
+<p>The catalyst for both BetterClaw and much of the current governance conversation remains fresh. A single agent with access to a Railway MCP server performed <code>railway_delete_volume</code> mid-conversation — not because the system prompt told it to, but because nothing stopped it. Nine seconds. Production database gone. Backups zapped.</p>
+<p>What makes this worth repeating is how typical the failure mode is: system-prompt instructions (&ldquo;be careful&rdquo;) are <em>persuasion</em>, not <em>enforcement</em>. They work until they don&rsquo;t, then the damage is done in seconds. The industry is responding by building enforcement at the infrastructure layer — hooks in the tool-call path, transparent proxies, compilation-based guardrails. This is exactly why Heed ships with plugin-enforced governance rather than relying on cooperative-only integrations as the end state. Persuasion tells you what the agent <em>should</em> do. Enforcement determines what it <em>can</em> do.</p>
+<p><strong>Heed angle:</strong> This is Mode 4 (Circuit Breaker) territory — the system detects cascading failures and auto-pauses. But prevention starts earlier: knowing which MCP tools carry destruction-level risk (delete, execute, send), classifying them accordingly, and applying Mode 1 (HITL Gate) automatically. Every agent integration should start with an inventory: &ldquo;Which of these tools, if called maliciously or accidentally, constitute a catastrophic event?&rdquo;</p>
+<hr />
+<h2>4. EU AI Act: Compliance Timeline Crunches (Aug 2027 Deadline)</h2>
+<p>With the Aug 2, 2027 deadline for Annex III high-risk systems approaching, the pressure is shifting from &ldquo;should we comply?&rdquo; to &ldquo;how do we implement Art. 14 capabilities?&rdquo; The Regulation requires three functional abilities: override (Art. 14(2)(c)), halt/slow-down (Art. 14(4)(d)), and real-time monitoring (Art. 14(3)). That&rsquo;s exactly Heed&rsquo;s four-mode architecture — Mode 3 (HOTL Monitor) for override capability, Mode 1 and 2 (HITL Gate / Grace Period) for halt/slow-down, and Mode 3&rsquo;s dashboard for monitoring transparency.</p>
+<p>Penalties run up to €15M or 3% of global annual turnover. Companies can&rsquo;t opt out. And the act requires <em>functional</em> capabilities, not specific products — meaning Heed isn&rsquo;t &ldquo;legally required,&rdquo; but it&rsquo;s one of the few products that implements all three capabilities in a single API call.</p>
+<p><strong>Heed angle:</strong> The compliance narrative matters here. Agents, frameworks, and dev tools need clear signals that oversight isn&rsquo;t optional. When an engineering team asks &ldquo;do we need approval gates?&rdquo; the answer is now a legal requirement with financial teeth. Heed&rsquo;s compliance-as-a-feature approach — auto-generating Art. 14 evidence, Art. 12 audit logs, and Art. 13 transparency docs — reduces the implementation burden from weeks of manual evidence collection to API calls during normal operation.</p>
+<hr />
+<h2>Closing: Install Heed. Be Compliant. Ship With Confidence.</h2>
+<p>This week&rsquo;s headlines tell a clear story: the agent governance category is maturing, but most solutions only cover part of the equation. Static analysis (Inkog) without runtime enforcement leaves the deployment gap. Runtime-only gateways (the traditional HITL model) miss the pre-deployment quality signal.</p>
+<p>Heed bridges both — and adds four operational modes, EU AI Act compliance artifacts, and plugin-enforced governance that doesn&rsquo;t rely on agent cooperation alone.</p>
+<p><strong>Get started in 30 seconds:</strong> https://heed.run/signup</p>
+<p><em>Or just curl it:</em></p>
+<pre><code class="language-bash">curl -X POST https://heed.run/api/v1/hitl/requests \
+  -H &quot;X-API-Key: hd_live_&lt;your_key&gt;&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;action&quot;:&quot;deploy_to_production&quot;,&quot;risk_level&quot;:&quot;high&quot;}'
+</code></pre>
+<p>— Heed Team · takeheed.ai · heed.run</p></article>
+
+<div class="cta">
+  <div>
+    <h3>Get the Agentic Ops Digest weekly</h3>
+    <p>The agent-governance landscape, with the enforcement angle. No spam.</p>
+  </div>
+  <a class="btn" href="mailto:hello@getheed.ai?subject=Subscribe%20to%20the%20Agentic%20Ops%20Digest">Subscribe</a>
+</div>
+<!-- TODO: replace mailto CTA with Buttondown/Loops embed once the list tool is chosen -->
+
+</main>
+<footer><div class="container">
+  Heed — enforced governance for AI agents · <a href="https://getheed.ai">getheed.ai</a> ·
+  <a href="mailto:hello@getheed.ai">hello@getheed.ai</a> ·
+  <a href="/digest/rss.xml">RSS</a>
+</div></footer>
+</body>
+</html>
