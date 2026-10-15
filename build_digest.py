@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 build_digest.py — Render Heed's Agentic Ops Digest from vault markdown into
-static pages on the getheed.ai landing site.
+static pages on the takeheed.ai landing site.
 
 Input :  ~/vault/100 - Projects/Heed/Newsletter Drafts/*.md  (YYYY-MM-DD.md)
 Output:  digest/<date>.html, digest/index.html, digest/rss.xml
@@ -22,7 +22,7 @@ try:
 except ImportError:
     sys.exit("pip install markdown")
 
-SITE = "https://takeheed.ai"  # live domain; getheed.ai currently has no DNS — flip when Vercel domain is verified
+SITE = "https://takeheed.ai"
 DEFAULT_VAULT = os.path.expanduser("~/vault/100 - Projects/Heed/Newsletter Drafts")
 
 # ── parsing ────────────────────────────────────────────────────────────────
@@ -41,6 +41,11 @@ def parse_issue(path):
             if ":" in line:
                 k, v = line.split(":", 1)
                 fm[k.strip()] = v.strip()
+    # strip cron-transcript scaffolding ("# Cron Job: ... / ## Prompt / ## Response")
+    # so internal prompt text never reaches the public site
+    if re.search(r"^#\s*Cron Job:", body, re.M):
+        resp = re.search(r"^## Response\s*$", body, re.M)
+        body = body[resp.end():] if resp else ""
     date_str = fm.get("createdAt") or os.path.splitext(os.path.basename(path))[0]
     try:
         date = datetime.strptime(date_str[:10], "%Y-%m-%d").replace(tzinfo=timezone.utc)
@@ -157,8 +162,8 @@ def page_head(title, desc):
 
 FOOT = f"""</main>
 <footer><div class="container">
-  Heed — enforced governance for AI agents · <a href="{SITE}">getheed.ai</a> ·
-  <a href="mailto:hello@getheed.ai">hello@getheed.ai</a> ·
+  Heed — enforced governance for AI agents · <a href="{SITE}">takeheed.ai</a> ·
+  <a href="mailto:hello@takeheed.ai">hello@takeheed.ai</a> ·
   <a href="/digest/rss.xml">RSS</a>
 </div></footer>
 </body>
@@ -172,7 +177,7 @@ def cta_block():
     <h3>Get the Agentic Ops Digest weekly</h3>
     <p>The agent-governance landscape, with the enforcement angle. No spam.</p>
   </div>
-  <a class="btn" href="mailto:hello@getheed.ai?subject=Subscribe%20to%20the%20Agentic%20Ops%20Digest">Subscribe</a>
+  <a class="btn" href="mailto:hello@takeheed.ai?subject=Subscribe%20to%20the%20Agentic%20Ops%20Digest">Subscribe</a>
 </div>
 <!-- TODO: replace mailto CTA with Buttondown/Loops embed once the list tool is chosen -->
 """
