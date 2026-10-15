@@ -22,7 +22,7 @@ try:
 except ImportError:
     sys.exit("pip install markdown")
 
-SITE = "https://getheed.ai"
+SITE = "https://takeheed.ai"  # live domain; getheed.ai currently has no DNS — flip when Vercel domain is verified
 DEFAULT_VAULT = os.path.expanduser("~/vault/100 - Projects/Heed/Newsletter Drafts")
 
 # ── parsing ────────────────────────────────────────────────────────────────
