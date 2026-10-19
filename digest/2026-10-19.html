@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Ops Digest — Oct 19, 2026 — Heed</title>
+  <meta name="description" content="Agentic Ops Digest — Oct 19, 2026" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Ops Digest" href="https://takeheed.ai/digest/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --bg:#080808; --surface:#101010; --surface-2:#161616; --border:#1f1f1f;
+  --border-2:#2a2a2a; --text:#f0f0f0; --muted:#606060; --muted-2:#888;
+  --accent:#4ade80; --accent-dim:rgba(74,222,128,.08); --code-bg:#0c0c0c;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+nav{border-bottom:1px solid var(--border);background:rgba(8,8,8,.85);backdrop-filter:blur(12px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1.1rem;font-weight:700;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:.88rem;color:var(--muted-2);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.issue-date{color:var(--muted);font-size:.85rem;margin-bottom:32px;font-family:'JetBrains Mono',monospace}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.deck{color:var(--muted-2);font-style:italic;margin-bottom:40px}
+.prose{padding:48px 0 32px}
+.prose h2{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin:48px 0 16px;
+          padding-bottom:10px;border-bottom:1px solid var(--border)}
+.prose h3{font-size:1.1rem;font-weight:600;margin:32px 0 10px}
+.prose p{color:var(--muted-2);line-height:1.75;margin-bottom:16px}
+.prose a{color:var(--accent);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose ul,.prose ol{margin:0 0 16px 24px;color:var(--muted-2)}
+.prose li{margin-bottom:6px;line-height:1.7}
+.prose blockquote{border-left:3px solid var(--accent);background:var(--accent-dim);
+                  padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;
+                  margin:0 0 16px;color:var(--muted-2)}
+.prose code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--code-bg);
+            border:1px solid var(--border);border-radius:4px;padding:2px 6px;color:#a7f3d0}
+.prose pre{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);
+           padding:16px;overflow-x:auto;margin-bottom:16px}
+.prose pre code{border:none;padding:0;background:transparent}
+.prose table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:.9rem}
+.prose th{text-align:left;color:var(--text);font-weight:600;border-bottom:1px solid var(--border-2);padding:8px 12px 8px 0}
+.prose td{color:var(--muted-2);border-bottom:1px solid var(--border);padding:8px 12px 8px 0}
+.cta{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+     padding:28px;margin:24px 0 80px;display:flex;justify-content:space-between;
+     align-items:center;gap:24px;flex-wrap:wrap}
+.cta h3{font-size:1.05rem;margin-bottom:4px}
+.cta p{font-size:.85rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;font-size:.9rem;font-weight:600;
+     padding:10px 20px;border-radius:var(--radius);text-decoration:none;
+     background:var(--accent);color:#000;white-space:nowrap}
+.btn:hover{opacity:.9}
+.issue-list{list-style:none;padding:8px 0 80px}
+.issue-list li{border-bottom:1px solid var(--border);padding:20px 0;display:flex;
+               justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.issue-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem}
+.issue-list a:hover{color:var(--accent)}
+.issue-list .meta{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.hero{padding:80px 0 24px}
+.hero p{margin-top:12px;max-width:560px}
+footer{border-top:1px solid var(--border);padding:28px 0 40px;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted-2);text-decoration:none}
+@media (max-width:640px){.cta{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a class="logo" href="/">heed<span>.</span></a>
+  <div class="nav-links">
+    <a href="/">Product</a>
+    <a href="/digest/">Digest</a>
+    <a href="https://takeheed.ai/#pricing">Pricing</a>
+  </div>
+</div></nav>
+<main class="container">
+
+<div class="hero">
+  <span class="label">Agentic Ops Digest</span>
+  <h1>Agentic Ops Digest — Oct 19, 2026</h1>
+  <div class="issue-date">Oct 19, 2026</div>
+  
+</div>
+<article class="prose"><h2>The Week in Agent Governance</h2>
+<h3>Hook: The tool-call interception war just got real</h3>
+<p>The past few weeks have seen an explosion of open-source projects aimed at one problem: <em>stopping agents from doing things they shouldn&rsquo;t, before they do them</em>. If you&rsquo;ve been following HN, GitHub, or the broader AI agent community, one signal stands out — everyone is building their own version of Heed. DashClaw, Kintsugi, BetterClaw, Laya Guard, Driftcop, Traceforce, Votal — the pattern is identical. A developer watched something go wrong (a database deleted, a supply-chain compromise, API keys leaked through agents), and built a pre-execution gate. This isn&rsquo;t fringe curiosity anymore. It&rsquo;s infrastructure.</p>
+<hr />
+<h3>1. EU AI Act enforcement enters its second wave — Aug 2026 compliance deadlines hit LLM pipelines</h3>
+<p>The EU&rsquo;s landmark AI Act enforcement began rolling out restrictions in February, and compliance-tech analysts are now mapping what happens in August 2026 when deeper operational requirements take effect — particularly Art. 14 (human oversight) and Art. 71 (post-market monitoring). For anyone shipping agentic systems, the message is clear: you can&rsquo;t just build a system prompt into &ldquo;be careful.&rdquo; Regulators will expect documented evidence that humans can intervene, audit trails exist, and post-deployment behavior is monitored.</p>
+<p><strong>Heed angle:</strong> Plugin-enforced denylists with decision logging directly address both articles. Every rejected action becomes a compliance artifact. Every approved action gets recorded with context. This isn&rsquo;t optional anymore if you&rsquo;re operating in or serving EU markets.</p>
+<hr />
+<h3>2. DashClaw: Intercept agent actions before they execute</h3>
+<p><a href="https://github.com/ucsandman/DashClaw">ucsandman&rsquo;s DashClaw</a> landed on HN this month as a full-stack answer to the &ldquo;find out what my agent did after the fact&rdquo; problem. It intercepts tool calls via PreToolUse hooks in Claude Code before execution, enforces YAML guard policies (allow/block/require_approval), records decisions to Postgres, and provides an SSE-based human approval channel with replay support. The author was honest about limitations upfront — contextual policies over full conversation history aren&rsquo;t there yet. That gap is real, and it&rsquo;s exactly where plugin-level behavioral monitoring (what we&rsquo;re building into Heed) needs to grow.</p>
+<p><strong>Heed angle:</strong> DashClaw validates the hook-interception approach we&rsquo;ve dogfooded. Where our path diverges: DashClaw relies on YAML rules for thresholds, while Heed enforces policies at the harness level through signed plugin bundles that can carry semantic understanding of intent, not just syntax patterns.</p>
+<hr />
+<h3>3. Kintsugi: Deterministic rule-based blocking beats LLM judgment</h3>
+<p><a href="https://github.com/arrowassassin/kintsugi">arr0wassass1n&rsquo;s Kintsugi</a> takes a stance that should make every agentic-ops engineer nod: <em>&ldquo;The decision to block a catastrophic command is made by deterministic rules a human wrote — never an LLM. A local model can only explain a command and add caution; it can never unlock or downgrade a rule-based block.&rdquo;</em> After auditing 1.4M fuzz inputs and a MITRE ATT&amp;CK + GTFOBins corpus, Kintsugi achieved zero catastrophic commands classified as safe. It works at the process/PATH layer, not as a per-tool plugin, with native hooks for Claude Code, Cursor, Codex, Qwen, Gemini, Copilot, and OpenCode.</p>
+<p><strong>Heed angle:</strong> This confirms what the critical_denylist plugin already does. Our denylist runs as a compiled set of deterministic rules — no LLM in the loop for rejection decisions. The difference: Heed&rsquo;s plugin system lets teams compose rulesets (denylist + allowlist + risk scoring) and load/unload them without touching code, whereas Kintsugi requires editing config files.</p>
+<hr />
+<h3>4. BetterClaw: The PocketOS incident response</h3>
+<p><a href="https://github.com/jfan22/BetterClaw">jfan22&rsquo;s BetterClaw</a> was built in direct response to the PocketOS incident (April 25) — a Cursor agent running Claude deleted a company&rsquo;s entire production database in 9 seconds, then zapped the backups. The agent had access to a Railway MCP server with destructive tools, and &ldquo;be careful&rdquo; in the system prompt didn&rsquo;t bind anything. BetterClaw compiles natural-language workflow descriptions into directed graphs where each node declares allowed tools. A plugin hook blocks anything outside the graph before dispatching to the MCP server. Works with Claude Code, Cowork, and OpenClaw.</p>
+<p><strong>Heed angle:</strong> The &ldquo;paragraph → graph&rdquo; authoring model is intuitive but limits composability. Heed&rsquo;s plugin system takes a different approach: plugins describe capabilities declaratively (<code>critical_denylist</code>, <code>before_tool_call</code>), and the harness composes them at runtime. No manual graph-authoring. But BetterClaw&rsquo;s core insight — that system-prompt warnings don&rsquo;t scale as control mechanisms — is precisely why Heed enforces governance at the harness layer, not in prompts.</p>
+<hr />
+<h3>5. Driftcop: Security scanning for MCP &ldquo;rug pull&rdquo; attacks</h3>
+<p><a href="https://github.com/sudoviz/driftcop">sudoviz/Driftcop</a> addresses a novel threat vector: tools that were useful and benign yesterday auto-updating into something malicious today. Since MCP servers can suffer from command injection, permission reuse, and version drift, Driftcop saves approved tool metadata on first connection, then detects any drift (description changes, parameter shifts, version updates) and blocks the agent until a human reviews and re-approves. Signed with Sigstore for transparency logs.</p>
+<p><strong>Heed angle:</strong> Supply-chain integrity for agent tools is an emerging category. Heed&rsquo;s plugin system already covers static policy enforcement; integrating continuous tool-integrity monitoring would be a natural extension. If a connected MCP server changes its tool definitions mid-session, Heed should refuse to proceed until the change is reviewed — same principle as Driftcop, enforced at a higher layer.</p>
+<hr />
+<h3>Closing Thought</h3>
+<p>The space is moving fast. What started as individual hobby projects has crystallized into recognizable patterns: pre-execution interception, deterministic rules over LLM judgment, auditable decision logs, and human-in-the-loop approval channels. These are exactly the primitives Heed was built around. The question now isn&rsquo;t whether you need governance — it&rsquo;s which layer you enforce it on. System prompts get ignored. Per-tool plugins are too fragmented. Harness-level enforcement with signed plugins is where the maturing solutions live.</p>
+<p>If you&rsquo;re building agents with tool access and you&rsquo;re still relying on prompts alone for safety, this week&rsquo;s headlines are your wake-up call.</p>
+<hr />
+<p><strong>See more at <a href="https://heed.run">heed.run</a></strong> — plugin-enforced governance for agentic AI. Open source. Zero-trust by default.</p></article>
+
+<div class="cta">
+  <div>
+    <h3>Get the Agentic Ops Digest weekly</h3>
+    <p>The agent-governance landscape, with the enforcement angle. No spam.</p>
+  </div>
+  <a class="btn" href="mailto:hello@takeheed.ai?subject=Subscribe%20to%20the%20Agentic%20Ops%20Digest">Subscribe</a>
+</div>
+<!-- TODO: replace mailto CTA with Buttondown/Loops embed once the list tool is chosen -->
+
+</main>
+<footer><div class="container">
+  Heed — enforced governance for AI agents · <a href="https://takeheed.ai">takeheed.ai</a> ·
+  <a href="mailto:hello@takeheed.ai">hello@takeheed.ai</a> ·
+  <a href="/digest/rss.xml">RSS</a>
+</div></footer>
+</body>
+</html>
