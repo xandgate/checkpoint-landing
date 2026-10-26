@@ -5,8 +5,17 @@
     <link>https://takeheed.ai/digest/</link>
     <description>Weekly curation of the AI-agent governance landscape, with the enforcement angle.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Oct 2026 10:00:41 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 10:01:24 +0000</lastBuildDate>
     <atom:link href="https://takeheed.ai/digest/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Agentic Ops Digest — Oct 26, 2026</title>
+      <link>https://takeheed.ai/digest/2026-10-26</link>
+      <guid isPermaLink="true">https://takeheed.ai/digest/2026-10-26</guid>
+      <pubDate>Mon, 26 Oct 2026 00:00:00 +0000</pubDate>
+      <description>The Week in Agent Governance 
+ Hook: Circuit breakers, control rooms, and the race to plug agent tool-call leaks 
+ The past few weeks have seen an explosion of open-source projects aimed at one probl</description>
+    </item>
     <item>
       <title>Agentic Ops Digest — Oct 19, 2026</title>
       <link>https://takeheed.ai/digest/2026-10-19</link>

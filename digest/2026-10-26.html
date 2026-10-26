@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Ops Digest — Oct 26, 2026 — Heed</title>
+  <meta name="description" content="Agentic Ops Digest — Oct 26, 2026" />
+  <link rel="alternate" type="application/rss+xml" title="Agentic Ops Digest" href="https://takeheed.ai/digest/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --bg:#080808; --surface:#101010; --surface-2:#161616; --border:#1f1f1f;
+  --border-2:#2a2a2a; --text:#f0f0f0; --muted:#606060; --muted-2:#888;
+  --accent:#4ade80; --accent-dim:rgba(74,222,128,.08); --code-bg:#0c0c0c;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+nav{border-bottom:1px solid var(--border);background:rgba(8,8,8,.85);backdrop-filter:blur(12px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1.1rem;font-weight:700;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:.88rem;color:var(--muted-2);text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.issue-date{color:var(--muted);font-size:.85rem;margin-bottom:32px;font-family:'JetBrains Mono',monospace}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.deck{color:var(--muted-2);font-style:italic;margin-bottom:40px}
+.prose{padding:48px 0 32px}
+.prose h2{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin:48px 0 16px;
+          padding-bottom:10px;border-bottom:1px solid var(--border)}
+.prose h3{font-size:1.1rem;font-weight:600;margin:32px 0 10px}
+.prose p{color:var(--muted-2);line-height:1.75;margin-bottom:16px}
+.prose a{color:var(--accent);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose ul,.prose ol{margin:0 0 16px 24px;color:var(--muted-2)}
+.prose li{margin-bottom:6px;line-height:1.7}
+.prose blockquote{border-left:3px solid var(--accent);background:var(--accent-dim);
+                  padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;
+                  margin:0 0 16px;color:var(--muted-2)}
+.prose code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--code-bg);
+            border:1px solid var(--border);border-radius:4px;padding:2px 6px;color:#a7f3d0}
+.prose pre{background:var(--code-bg);border:1px solid var(--border);border-radius:var(--radius);
+           padding:16px;overflow-x:auto;margin-bottom:16px}
+.prose pre code{border:none;padding:0;background:transparent}
+.prose table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:.9rem}
+.prose th{text-align:left;color:var(--text);font-weight:600;border-bottom:1px solid var(--border-2);padding:8px 12px 8px 0}
+.prose td{color:var(--muted-2);border-bottom:1px solid var(--border);padding:8px 12px 8px 0}
+.cta{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+     padding:28px;margin:24px 0 80px;display:flex;justify-content:space-between;
+     align-items:center;gap:24px;flex-wrap:wrap}
+.cta h3{font-size:1.05rem;margin-bottom:4px}
+.cta p{font-size:.85rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;font-size:.9rem;font-weight:600;
+     padding:10px 20px;border-radius:var(--radius);text-decoration:none;
+     background:var(--accent);color:#000;white-space:nowrap}
+.btn:hover{opacity:.9}
+.issue-list{list-style:none;padding:8px 0 80px}
+.issue-list li{border-bottom:1px solid var(--border);padding:20px 0;display:flex;
+               justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.issue-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem}
+.issue-list a:hover{color:var(--accent)}
+.issue-list .meta{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.hero{padding:80px 0 24px}
+.hero p{margin-top:12px;max-width:560px}
+footer{border-top:1px solid var(--border);padding:28px 0 40px;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted-2);text-decoration:none}
+@media (max-width:640px){.cta{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<nav><div class="container nav-inner">
+  <a class="logo" href="/">heed<span>.</span></a>
+  <div class="nav-links">
+    <a href="/">Product</a>
+    <a href="/digest/">Digest</a>
+    <a href="https://takeheed.ai/#pricing">Pricing</a>
+  </div>
+</div></nav>
+<main class="container">
+
+<div class="hero">
+  <span class="label">Agentic Ops Digest</span>
+  <h1>Agentic Ops Digest — Oct 26, 2026</h1>
+  <div class="issue-date">Oct 26, 2026</div>
+  
+</div>
+<article class="prose"><h2>The Week in Agent Governance</h2>
+<h3>Hook: Circuit breakers, control rooms, and the race to plug agent tool-call leaks</h3>
+<p>The past few weeks have seen an explosion of open-source projects aimed at one problem: <em>stopping agents from doing things they shouldn&rsquo;t, before they do them</em>. This week the signal grew louder. New tools landed on Hacker News and GitHub covering the full spectrum — sub-millisecond AST circuit breakers, multi-agent control rooms, and crash-resilient governance gates. Meanwhile, academic research is catching up with formal three-pillar frameworks. If you&rsquo;ve been shipping agents with tool access, the message is consistent: system prompts don&rsquo;t scale as safety mechanisms, and harness-level enforcement is becoming table stakes.</p>
+<hr />
+<h3>1. Aw1-breaker — Sub-millisecond AST circuit breaker for AI agent tool calls</h3>
+<p><a href="https://github.com/aw1-breaker">Aw1-breaker</a> just appeared on HN as a surprisingly focused solution to a hard problem: what if you need to stop an agent mid-execution based on the <em>structure</em> of its planned action, not just keyword matching? It parses the abstract syntax tree of every tool call and applies circuit-breaker logic — if a pattern matches a danger zone (deep recursion, unbounded loops, resource-exhaustive operations), it trips before execution begins. Sub-millisecond latency means it doesn&rsquo;t add perceptible friction. Unlike heuristic blocklists, AST-level analysis catches obfuscated or dynamically constructed commands that slip past string matching.</p>
+<p><strong>Heed angle:</strong> This is exactly the kind of pre-execution gate our <code>critical_denylist</code> plugin targets, but at a deeper level. Our denylist catches dangerous <em>commands</em>; Aw1-breaker catches dangerous <em>computation patterns</em>. Integrating both layers — deterministic denylist at the command level plus structural analysis at the AST level — would be a natural two-stage defense. The question is whether Heed&rsquo;s plugin API should expose AST hooks, or whether AST analysis belongs in a separate specialized plugin.</p>
+<hr />
+<h3>2. GOD — Real-time control room for LLM agent societies (EMNLP 2026 demo)</h3>
+<p><a href="https://github.com/XiaoLuoLYG/GOD">XiaoLuoLYG/GOD</a> shipped as an EMNLP 2026 demo: a real-time visualization and intervention dashboard for managing entire societies of LLM agents. Think of it as a war room where operators can see what each agent is doing, pause any of them, redirect capabilities, and review decision chains across the whole ensemble. For single-agent setups, it may be overkill. But as teams move toward multi-agent architectures (which LangGraph, CrewAI, and similar frameworks increasingly encourage), the visibility gap between &ldquo;what my agents are doing&rdquo; and &ldquo;what they&rsquo;re actually doing&rdquo; becomes a governance nightmare.</p>
+<p><strong>Heed angle:</strong> GOD focuses on post-facto visibility and manual intervention. Heed takes the opposite approach: prevention before intervention. But there&rsquo;s synergy. Heed&rsquo;s audit logs and decision recordings produce exactly the structured data a control room like GOD needs. We could imagine Heed feeding its event stream into visualization dashboards. Prevention-first doesn&rsquo;t mean eliminating oversight — it means making oversight about exceptions rather than routine checking.</p>
+<hr />
+<h3>3. arXiv: A Three-Pillar Governance Framework for Safe and Trustworthy AI Agents</h3>
+<p>A new arXiv paper outlines what it calls a <strong>three-pillar framework</strong>: (1) alignment of agent behavior with human intent, (2) technical safeguards at the architecture level (sandboxing, capability restrictions), and (3) accountability structures including human oversight and audit trails. The paper critically reviews existing Human-in-the-Loop approaches and finds most are too coarse-grained — they ask humans to approve entire workflows rather than individual actions, which creates approval fatigue and leads to rubber-stamping. The recommended model is granular, action-level oversight with automated filtering of低风险 operations.</p>
+<p><strong>Heed angle:</strong> This academic framing directly validates Heed&rsquo;s design. The three pillars map cleanly to: (1) policy plugins define intent boundaries, (2) harness-level enforcement provides architectural safeguards, and (3) signed plugin bundles with decision logging create auditability. The paper&rsquo;s critique of coarse-grained HITL is precisely why Heed operates at the individual tool-call level — blocking dangerous actions automatically while letting safe ones flow through without human friction.</p>
+<hr />
+<h3>4. AIKit — Crash-resilient governance gates for AI coding agents</h3>
+<p><a href="https://github.com/AegeanWorks/AIKit">AegeanWorks/AIKit</a> positions itself as a different flavor of governance: versioned task ledgers, commit-level verification, secret scanning, and per-project governance gates with automatic delivery checkpoints. Where other tools focus on preventing destructive actions, AIKit focuses on ensuring completion integrity — did the agent actually deliver what was promised, without credential leakage? It uses a task ledger to track what was assigned vs. what was executed, with cryptographic verification at each commit boundary.</p>
+<p><strong>Heed angle:</strong> AIKit and Heed solve adjacent but non-overlapping problems. Heed says &ldquo;don&rsquo;t execute this&rdquo;; AIKit says &ldquo;did you finish what you said you would?&rdquo; They&rsquo;re complementary layers: Heed prevents harm during execution, AIKit verifies quality and completeness after. A mature agentic workflow probably needs both — govern the process and verify the outcome. AIKit&rsquo;s AL-1.0 commercial license and free personal-use tier also suggest this category is moving toward productization.</p>
+<hr />
+<h3>5. Skill-spotter — Auto-detect agent prompts and commands to create skills</h3>
+<p><a href="https://github.com/ykisana/skill-spotter">ykisana/skill-spotter</a> takes an unusual approach: instead of governing what agents <em>do</em>, it observes what agents <em>say</em> and extracts reusable skill definitions from their prompt patterns and command sequences. The idea is meta-governance — learning from agent behavior to build better scaffolding. It&rsquo;s less about stopping bad actions and more about encoding good patterns so future runs follow proven templates.</p>
+<p><strong>Heed angle:</strong> This touches an interesting edge case for governance systems. If agents can extract their own operating procedures from observed behavior, we should consider whether governance policies themselves can be auto-discovered or recommended. Heed&rsquo;s plugin manifests could potentially learn from approved action patterns — surfaces recurring successful workflows as template plugins. Not a core feature today, but worth flagging as the ecosystem evolves toward self-improving agentic systems.</p>
+<hr />
+<h3>Closing Thought</h3>
+<p>Five distinct projects, five angles on the same problem. Circuit breakers at the AST layer. Control rooms for agent societies. Academic frameworks codifying what practitioners have learned in the trenches. Delivery verification alongside execution prevention. Pattern extraction from agent behavior. All of them pointing to the same conclusion: agentic security isn&rsquo;t one tool. It&rsquo;s a stack. System prompts get ignored. One-layer defenses create blind spots. Harness-level enforcement with composable, signed plugins is the emerging standard — because no single mechanism covers the full attack surface of autonomous agents.</p>
+<p>The question isn&rsquo;t whether your agents need governance. Every headline this week proves they do. The question is whether you&rsquo;re enforcing it at the right layer, and whether your governance survives when the agent gets smarter than its ruleset.</p>
+<hr />
+<p><strong>See more at <a href="https://heed.run">heed.run</a></strong> — plugin-enforced governance for agentic AI. Open source. Zero-trust by default.</p></article>
+
+<div class="cta">
+  <div>
+    <h3>Get the Agentic Ops Digest weekly</h3>
+    <p>The agent-governance landscape, with the enforcement angle. No spam.</p>
+  </div>
+  <a class="btn" href="mailto:hello@takeheed.ai?subject=Subscribe%20to%20the%20Agentic%20Ops%20Digest">Subscribe</a>
+</div>
+<!-- TODO: replace mailto CTA with Buttondown/Loops embed once the list tool is chosen -->
+
+</main>
+<footer><div class="container">
+  Heed — enforced governance for AI agents · <a href="https://takeheed.ai">takeheed.ai</a> ·
+  <a href="mailto:hello@takeheed.ai">hello@takeheed.ai</a> ·
+  <a href="/digest/rss.xml">RSS</a>
+</div></footer>
+</body>
+</html>
