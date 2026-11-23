@@ -5,8 +5,15 @@
     <link>https://takeheed.ai/digest/</link>
     <description>Weekly curation of the AI-agent governance landscape, with the enforcement angle.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Nov 2026 10:00:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 10:01:25 +0000</lastBuildDate>
     <atom:link href="https://takeheed.ai/digest/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Agentic Ops Digest — November 23, 2026</title>
+      <link>https://takeheed.ai/digest/2026-11-23</link>
+      <guid isPermaLink="true">https://takeheed.ai/digest/2026-11-23</guid>
+      <pubDate>Mon, 23 Nov 2026 00:00:00 +0000</pubDate>
+      <description>Agentic Ops Digest is a weekly curation of developments at the intersection of AI agent security, governance, and regulatory compliance.</description>
+    </item>
     <item>
       <title>Agentic Ops Digest: Compliance Isn&#x27;t a Checklist — It&#x27;s an Architecture Problem</title>
       <link>https://takeheed.ai/digest/2026-11-16</link>
